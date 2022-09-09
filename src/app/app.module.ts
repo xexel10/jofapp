@@ -19,18 +19,9 @@ import { LoginComponent } from './auth/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    AuthComponent,
-    HomeComponent,
-    CadastroComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoginComponent
-=======
     FooterComponent,
     HeaderComponent
 
->>>>>>> configurar-rotas-fabiano
   ],
   imports: [
     BrowserModule,
