@@ -12,7 +12,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
-import { LoginComponent } from './auth/login/login.component';
+import { CadastroModule } from './cadastro/cadastro.module';
 
 
 
@@ -28,7 +28,8 @@ import { LoginComponent } from './auth/login/login.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    CadastroModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
