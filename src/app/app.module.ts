@@ -5,23 +5,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { AuthComponent } from './auth/auth.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { HomeComponent } from './pages/home/home.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-
-import { HeaderComponent } from './pages/header/header.component';
-import { FooterComponent } from './pages/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
-
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    HeaderComponent
 
+    AuthComponent,
+    CadastroComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
