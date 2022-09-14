@@ -16,6 +16,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { CadastrosModule } from './cadastros/cadastros.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './pages/home/home.component';
 
 
 
@@ -24,7 +25,8 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    AppNavbarComponent
+    AppNavbarComponent,
+    HomeComponent
 
   ],
   imports: [
