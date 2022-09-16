@@ -15,7 +15,6 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { CadastroModule } from './cadastro/cadastro.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
