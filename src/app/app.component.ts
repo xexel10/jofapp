@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jofapp';
+
+
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+  }
+
+  isLoggedIn(){
+    if (this.authService.userIsAuth()){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
+
 }

@@ -1,0 +1,31 @@
+<form class="row g-3 needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+    <div class="col-sm-12">
+        <label for="categoria" class="form-label">Nome da Categoria</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            id="categoria" 
+            placeholder="Nome da Categoria" 
+            formControlName="categoria" 
+            [ngClass]="{ 'is-invalid': submitted && hasError('categoria') }"
+            required>
+            <div class="invalid-feedback" *ngIf="hasError('categoria') && hasError('categoria')!['required']" >
+                Por favor informe um nome para o categoria.
+            </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" formControlName="status">
+            <label class="form-check-label" for="invalidCheck">
+                Status
+            </label>
+            <div class="invalid-feedback">
+                You must agree before submitting.
+            </div>
+        </div>
+    </div>
+    <div class="col-12" style="margin-top: 10px;">
+        <button class="btn btn-primary" type="submit" (click)="onSubmit" >Salvar</button>
+        <button class="btn btn-default" type="submit" (click)="onCancel">Cancelar</button>
+    </div>
+</form>
