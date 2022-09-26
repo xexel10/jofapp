@@ -42,3 +42,6 @@ import { SharedModule } from './shared/shared.module';
 })
 
 export class AppModule {}
+
+/* Package.jon para cors */
+/*--proxy-config proxy.conf.js*/

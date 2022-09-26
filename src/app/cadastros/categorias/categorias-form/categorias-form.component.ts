@@ -1,9 +1,11 @@
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CategoriaService } from './../../../cadastros/categorias/categoria.service';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-categorias-form',
@@ -20,36 +22,51 @@ export class CategoriasFormComponent implements OnInit {
     private fb: FormBuilder,
     private service: CategoriaService,
     private modal: AlertModalService,
-    private location: Location  ) { }
+    private location: Location,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
+    this.route.params
+      .pipe(
+        map((params: any) => params['id']),
+        switchMap(id => this.service.loadByID(id)) //cancela as requisições anteriores e seta apenas o ultimo pedido
+      )
+      .subscribe(categoria => this.updateForm(categoria));
+
     this.form = this.fb.group({
-      categoria:[null, Validators.required, Validators.minLength(3), Validators.maxLength(100)],
-      status:[null]
+      categoria: [null, Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+      status: [null]
     });
 
   }
 
-  onSubmit(){
+  updateForm(categoria) {
+    this.form.patchValue({
+      id: categoria.id,
+      categoria: categoria.nome,
+      status: categoria.status
+    });
+  }
+  onSubmit() {
 
     this.submitted = true;
-    if(this.form.valid){
+    if (this.form.valid) {
 
-    /*  this.service.create(this.form.value).subscribe(
-        success => {
-          this.modal.showAlertSuccess('Criado com sucesso!');
-          this.location.back();
-        },
-        error => this.modal.showAlertDanger('Error ao criar categoria, tente novamente!'),
-        () => console.log('request completo')
-      );*/
-      
+      /*  this.service.create(this.form.value).subscribe(
+          success => {
+            this.modal.showAlertSuccess('Criado com sucesso!');
+            this.location.back();
+          },
+          error => this.modal.showAlertDanger('Error ao criar categoria, tente novamente!'),
+          () => console.log('request completo')
+        );*/
+
     }
 
   }
 
-  onCancel(){
+  onCancel() {
     this.submitted = false;
     this.form.reset;
 

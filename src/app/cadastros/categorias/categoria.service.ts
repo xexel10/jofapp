@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriaService {
 
-  private readonly API = `${environment.API}categorias`;
+  private readonly API = `${environment.API}categorias/`;
 
   constructor(private http: HttpClient) { }
 

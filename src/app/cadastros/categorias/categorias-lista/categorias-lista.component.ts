@@ -28,8 +28,7 @@ export class CategoriasListaComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: BsModalService, 
-    private service: CategoriaService,    
+    private service: CategoriaService,
     private alertService: AlertModalService
   ) { }
 
@@ -46,7 +45,10 @@ export class CategoriasListaComponent implements OnInit {
         return EMPTY;
       })
     );
+  }
 
+  onEdit(id){
+    this.router.navigate(['editar', id], {relativeTo: this.route});
   }
 
   handleError(){

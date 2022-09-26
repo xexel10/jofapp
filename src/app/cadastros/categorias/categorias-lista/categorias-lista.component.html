@@ -19,16 +19,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngfor="let cat categorias">
+          <tr *ngFor="let cat of categorias">
             <td>{{ cat.id }}</td>
             <td>{{ cat.nome }}</td>
-            <td>{{cat.status}}</td>
+            <td>{{ cat.status }}</td>
             <td>
               <span class="float-right">
-                <button class="btn btn-outline-warning mb-1 btn-sm">
+                <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(cat.id)">
                   Atualizar
                 </button>
-  
+
                 <button class="btn btn-outline-danger mb-1 btn-sm">
                   Remover
                 </button>
@@ -44,7 +44,7 @@
 
     </div>
   </div>
-  
+
   <ng-template #deleteModal>
     <div class="modal-body text-center">
       <p>Tem certeza que deseja remover esse categoria?</p>
@@ -52,4 +52,3 @@
       <button type="button" class="btn btn-primary">Nao</button>
     </div>
   </ng-template>
-  
