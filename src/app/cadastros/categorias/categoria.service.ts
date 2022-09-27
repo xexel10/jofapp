@@ -22,7 +22,7 @@ export class CategoriaService {
   }
 
   loadByID(id) {
-    return this.http.get<Categoria>(`${this.API}/${id}`).pipe(take(1));
+    return this.http.get<Categoria>(`${this.API}${id}/`).pipe(take(1));
   }
 
   private create(categoria) {
@@ -30,7 +30,7 @@ export class CategoriaService {
   }
 
   private update(categoria) {
-    return this.http.put(`${this.API}/${categoria.id}`, categoria).pipe(take(1));
+    return this.http.put(`${this.API}${categoria.id}/`, categoria).pipe(take(1));
   }
 
   save(categoria) {
@@ -41,6 +41,6 @@ export class CategoriaService {
   }
 
   remove(id) {
-    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
+    return this.http.delete(`${this.API}${id}/`).pipe(take(1));
   }
 }

@@ -27,7 +27,7 @@ export class CategoriasFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.params
+    /*this.route.params
       .pipe(
         map((params: any) => params['id']),
         switchMap(id => this.service.loadByID(id)) //cancela as requisições anteriores e seta apenas o ultimo pedido
@@ -37,38 +37,47 @@ export class CategoriasFormComponent implements OnInit {
     this.form = this.fb.group({
       categoria: [null, Validators.required, Validators.minLength(3), Validators.maxLength(100)],
       status: [null]
+    });*/
+
+    const categoria = this.route.snapshot.data['categoria'];
+
+    this.form = this.fb.group({
+      id: [categoria.id],
+      nome: [categoria.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
+      status: [categoria.status]
     });
 
   }
 
-  updateForm(categoria) {
+  /*updateForm(categoria) {
 
     this.form.patchValue({
       id: categoria.id,
       categoria: categoria.nome,
       status: categoria.status
     });
-  }
+  }*/
   onSubmit() {
 
     this.submitted = true;
     if (this.form.valid) {
 
+      let msgSuccess = 'Categoria criada com sucesso!';
+      let msgError = 'Erro ao criar categoria, tente novamente!';
       if (this.form.value.id) {
-        //update
-      } else {
-
-        /*  this.service.create(this.form.value).subscribe(
-            success => {
-              this.modal.showAlertSuccess('Criado com sucesso!');
-              this.location.back();
-            },
-            error => this.modal.showAlertDanger('Error ao criar categoria, tente novamente!'),
-            () => console.log('request completo')
-          );*/
+        msgSuccess = 'Categoria atualizada com sucesso!';
+        msgError = 'Erro ao atualizar curso, tente novamente!';
       }
-    }
 
+      this.service.save(this.form.value).subscribe(
+        success => {
+          this.modal.showAlertSuccess(msgSuccess);
+          this.location.back();
+        },
+        error => this.modal.showAlertDanger(msgError)
+      );
+
+    }
   }
 
   onCancel() {
