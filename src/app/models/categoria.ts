@@ -1,6 +1,6 @@
 export interface Categoria {
     id: number;
-    nome: string;
+    nome: string | null;
     status: boolean;
   }
   

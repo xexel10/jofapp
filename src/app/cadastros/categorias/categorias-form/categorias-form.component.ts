@@ -42,6 +42,7 @@ export class CategoriasFormComponent implements OnInit {
   }
 
   updateForm(categoria) {
+
     this.form.patchValue({
       id: categoria.id,
       categoria: categoria.nome,
@@ -53,15 +54,19 @@ export class CategoriasFormComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
 
-      /*  this.service.create(this.form.value).subscribe(
-          success => {
-            this.modal.showAlertSuccess('Criado com sucesso!');
-            this.location.back();
-          },
-          error => this.modal.showAlertDanger('Error ao criar categoria, tente novamente!'),
-          () => console.log('request completo')
-        );*/
+      if (this.form.value.id) {
+        //update
+      } else {
 
+        /*  this.service.create(this.form.value).subscribe(
+            success => {
+              this.modal.showAlertSuccess('Criado com sucesso!');
+              this.location.back();
+            },
+            error => this.modal.showAlertDanger('Error ao criar categoria, tente novamente!'),
+            () => console.log('request completo')
+          );*/
+      }
     }
 
   }
