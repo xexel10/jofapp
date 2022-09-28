@@ -1,3 +1,4 @@
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,14 +16,15 @@ import { CommonModule } from '@angular/common';
   ],
   declarations: [
     FormDebugComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ConfirmModalComponent
   ],
   exports: [
     FormDebugComponent,
     AlertModalComponent
 
   ],
-  entryComponents:[AlertModalComponent],
+  entryComponents:[AlertModalComponent, ConfirmModalComponent],
   providers: [  ]
 })
 export class SharedModule { }

@@ -24,6 +24,7 @@ export class CategoriasListaComponent implements OnInit {
   categorias$!: Observable<Categoria[]>;
   error$ = new Subject<boolean>();
   bsModalRef?: BsModalRef;
+  @ViewChild('deleteModal') deleteModal;
 
   constructor(
     private router: Router,
@@ -49,6 +50,18 @@ export class CategoriasListaComponent implements OnInit {
 
   onEdit(id){
     this.router.navigate(['/editar', id], {relativeTo: this.route});
+  }
+
+  onDelete(cat){
+
+  }
+
+  onConfirmDelete(){
+
+  }
+
+  onDeclineDelete(){
+
   }
 
   handleError(){
