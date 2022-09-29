@@ -6,7 +6,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -19,7 +18,6 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +25,6 @@ import { HomeComponent } from './pages/home/home.component';
     HeaderComponent,
     AppNavbarComponent,
     HomeComponent
-
   ],
   imports: [
     BrowserModule,
