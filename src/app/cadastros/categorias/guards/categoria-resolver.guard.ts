@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, of, empty } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Categoria } from './../../../models/categoria';
 import { CategoriaService } from '../categoria.service';
