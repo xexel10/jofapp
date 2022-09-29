@@ -1,6 +1,9 @@
-import { CadastrosModule } from './cadastros/cadastros.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './home/home.component';
+//import { CadastrosModule } from './cadastros/cadastros.module';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
 
@@ -8,9 +11,8 @@ const routes: Routes = [
     path: 'categoria',
     loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
   },
-  {
-    path: '', pathMatch: 'full', redirectTo: 'busca-reativa'
-  }
+  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({

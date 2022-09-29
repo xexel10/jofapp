@@ -6,13 +6,8 @@ import { CategoriasFormComponent } from './categorias/categorias-form/categorias
 import { CategoriasListaComponent } from './categorias/categorias-lista/categorias-lista.component';
 import { CategoriaResolverGuard } from './categorias/guards/categoria-resolver.guard';
 
-/*
-const routes: Routes = [
-  {path: '', component: CategoriasListaComponent},
-  {path: 'novo', component: CategoriasFormComponent},
-  {path: 'editar/:id', component: CategoriasFormComponent}
-];*/
-
+/* Rotas hard code vem primeiro, como no exemple da rota novo. */
+/*Poderiamos tb utilizar as rotas filhas caso necessário nesse routing, muito utilizado em telas mestre-detalhe */
 const routes: Routes = [
   { path: '', component: CategoriasListaComponent },
   {

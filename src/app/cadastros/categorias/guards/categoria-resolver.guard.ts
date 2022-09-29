@@ -15,12 +15,11 @@ export class CategoriaResolverGuard implements Resolve<Categoria> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Categoria | Observable<Categoria> {
 
-    const cat = {} as Categoria;
 
     if (route.params && route.params['id']){
       return this.service.loadByID(route.params['id'])
     }
-
+    const cat = {status:true} as Categoria;
     return of (cat);
 
   }
