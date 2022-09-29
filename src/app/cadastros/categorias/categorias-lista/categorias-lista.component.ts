@@ -1,7 +1,7 @@
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { catchError } from 'rxjs/operators';
-import { empty, Observable, Subject, EMPTY } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
+import { empty, Observable, Subject, EMPTY, switchMap } from 'rxjs';
 import { Categoria } from './../../../models/categoria';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -16,12 +16,10 @@ import { CategoriaService } from '../categoria.service';
 })
 export class CategoriasListaComponent implements OnInit {
 
-  // array de categoria
-  //categorias!: Categoria[];
-
   //O $ é uma prática da comunidade//
   //Criei um observable de categorias que será um array de categoria
   categorias$!: Observable<Categoria[]>;
+  categoriaSelecionada!: Categoria;
   error$ = new Subject<boolean>();
   bsModalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal;
@@ -48,23 +46,39 @@ export class CategoriasListaComponent implements OnInit {
     );
   }
 
-  onEdit(id){
-    this.router.navigate(['/editar', id], {relativeTo: this.route});
+  onEdit(id) {
+    this.router.navigate(['/editar', id], { relativeTo: this.route });
   }
 
-  onDelete(cat){
+  onDelete(cat) {
+
+    this.categoriaSelecionada = cat;
+
+    const result$ = this.alertService.showConfirm('Confirmacao', 'Tem certeza que deseja remover esse curso?');
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.service.remove(cat.id) : EMPTY)
+      )
+      .subscribe(
+        success => {
+          this.onRefresh();
+        },
+        error => {
+          this.alertService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.');
+        }
+      );
+  }
+
+  onConfirmDelete() {
 
   }
 
-  onConfirmDelete(){
+  onDeclineDelete() {
 
   }
 
-  onDeclineDelete(){
-
-  }
-
-  handleError(){
+  handleError() {
     this.alertService.showAlertDanger('Erro ao carregar cursos. Tente novamente mais tarde.');
   }
 

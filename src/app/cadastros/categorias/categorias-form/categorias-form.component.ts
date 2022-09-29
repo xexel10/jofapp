@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { CategoriaService } from './../../../cadastros/categorias/categoria.service';
+import { CategoriaService } from './../categoria.service';
 import { map, switchMap } from 'rxjs';
 
 @Component({
@@ -27,18 +27,6 @@ export class CategoriasFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*this.route.params
-      .pipe(
-        map((params: any) => params['id']),
-        switchMap(id => this.service.loadByID(id)) //cancela as requisições anteriores e seta apenas o ultimo pedido
-      )
-      .subscribe(categoria => this.updateForm(categoria));
-
-    this.form = this.fb.group({
-      categoria: [null, Validators.required, Validators.minLength(3), Validators.maxLength(100)],
-      status: [null]
-    });*/
-
     const categoria = this.route.snapshot.data['categoria'];
 
     this.form = this.fb.group({
@@ -49,14 +37,6 @@ export class CategoriasFormComponent implements OnInit {
 
   }
 
-  /*updateForm(categoria) {
-
-    this.form.patchValue({
-      id: categoria.id,
-      categoria: categoria.nome,
-      status: categoria.status
-    });
-  }*/
   onSubmit() {
 
     this.submitted = true;

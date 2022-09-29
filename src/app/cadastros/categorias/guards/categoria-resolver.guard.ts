@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, UrlTree } from '@
 import { Observable, of, empty } from 'rxjs';
 
 import { Categoria } from './../../../models/categoria';
-import { CategoriaService } from './../categoria.service';
+import { CategoriaService } from '../categoria.service';
 
 @Injectable({
   providedIn: 'root'

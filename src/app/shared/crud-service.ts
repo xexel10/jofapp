@@ -14,7 +14,7 @@ export class CrudService<T> {
   }
 
   loadByID(id) {
-    return this.http.get<T>(`${this.API_URL}/${id}`).pipe(take(1));
+    return this.http.get<T>(`${this.API_URL}${id}`).pipe(take(1));
   }
 
   private create(record: T) {
@@ -22,7 +22,7 @@ export class CrudService<T> {
   }
 
   private update(record: T) {
-    return this.http.put(`${this.API_URL}/${record['id']}`, record).pipe(take(1));
+    return this.http.put(`${this.API_URL}${record['id']}`, record).pipe(take(1));
   }
 
   save(record: T) {
@@ -33,6 +33,6 @@ export class CrudService<T> {
   }
 
   remove(id) {
-    return this.http.delete(`${this.API_URL}/${id}`).pipe(take(1));
+    return this.http.delete(`${this.API_URL}${id}`).pipe(take(1));
   }
 }
