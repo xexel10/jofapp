@@ -1,11 +1,15 @@
-<div *ngIf="isLogged(); else pagePublic">
-    <app-app-navbar></app-app-navbar>
+<div *ngIf="currentRoute.includes('/admin') || currentRoute.includes('/login'); else pagePublic">
+    <router-outlet></router-outlet>
 </div>
+
+
+
+
+
 
 <ng-template #pagePublic>
     <app-header></app-header>
+    <router-outlet></router-outlet>
+
 </ng-template>
 
-<div class="container">
-    <router-outlet></router-outlet>
-</div>

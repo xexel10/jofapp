@@ -1,3 +1,4 @@
+import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -9,10 +10,12 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
 
   {
-    path: 'categoria',
+    path: 'admin/categoria',
     loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
   },
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AppNavbarComponent },
+
   { path: '', component: HomeComponent }
 ];
 

@@ -11,14 +11,14 @@ import { CategoriaResolverGuard } from './categorias/guards/categoria-resolver.g
 const routes: Routes = [
   { path: '', component: CategoriasListaComponent },
   {
-    path: 'novo',
+    path: 'admin/categoria/novo',
     component: CategoriasFormComponent,
     resolve: {
       categoria: CategoriaResolverGuard
     }
   },
   {
-    path: 'editar/:id',
+    path: 'admin/categoria/editar/:id',
     component: CategoriasFormComponent,
     resolve: {
       categoria: CategoriaResolverGuard

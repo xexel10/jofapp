@@ -24,13 +24,13 @@
         <li class="nav-item item"><a a href="#" class="nav-link item"><i class="bi bi-facebook icon"></i> </a></li>
         <li class="nav-item item"><a a href="#" class="nav-link item"><i class="bi bi-instagram icon"></i></a></li>
         <li class="nav-item item"><a a href="#" class="nav-link item"><i class="bi bi-whatsapp icon"></i></a></li>
-        
-        <li *ngIf="!isLoged()"  class="nav-item item"><a (click)="logIn()"  href="#" class="nav-link item"><i class="bi bi-box-arrow-in-right icon"></i> Logar</a></li>
+
+        <li *ngIf="!isLoged()"  class="nav-item item"><a  href="/login" class="nav-link item"><i class="bi bi-box-arrow-in-right icon"></i> Logar</a></li>
         <li *ngIf="isLoged()" class="nav-item item"><a (click)="logOut()" href="#" class="nav-link item"><i class="bi bi-box-arrow-left icon"></i> Sair</a></li>
 
       </ul>
     </header>
   </div>
-    
+
 </body>
 </html>

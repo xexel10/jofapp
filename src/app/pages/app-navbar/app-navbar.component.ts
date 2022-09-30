@@ -1,5 +1,6 @@
+import { TokenService } from './../../auth/token/token.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-navbar',
@@ -8,14 +9,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppNavbarComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private tokenService: TokenService, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.route.snapshot);
+
+
+    if (!this.tokenService.hasToken()){
+      this.router.navigate(['/login']);
+    }
   }
 
   logOut(){
     window.localStorage.removeItem('USER');
+    this.router.navigate(['/']);
+
 
   }
 

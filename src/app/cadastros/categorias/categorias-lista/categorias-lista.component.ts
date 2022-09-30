@@ -1,3 +1,4 @@
+import { TokenService } from './../../../auth/token/token.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { catchError, take } from 'rxjs/operators';
@@ -22,19 +23,25 @@ export class CategoriasListaComponent implements OnInit {
   categoriaSelecionada!: Categoria;
   error$ = new Subject<boolean>();
   bsModalRef?: BsModalRef;
+  basePath = '/admin/categoria'
   @ViewChild('deleteModal') deleteModal;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private service: CategoriaService,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private tokenService: TokenService
   ) { }
 
 
   ngOnInit() {
+
+    if (!this.tokenService.hasToken()){
+      this.router.navigate(['/login']);
+    }
     this.onRefresh();
-    console.log('Route: ', this.router.url)
+
 
   }
 
@@ -49,7 +56,7 @@ export class CategoriasListaComponent implements OnInit {
   }
 
   onEdit(id) {
-    this.router.navigate(['/editar', id], { relativeTo: this.route });
+    this.router.navigate([this.basePath+'/editar', id], { relativeTo: this.route });
   }
 
   onDelete(cat) {

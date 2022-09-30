@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/auth/token/token.service';
 
@@ -8,7 +9,7 @@ import { TokenService } from 'src/app/auth/token/token.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +20,10 @@ export class HeaderComponent implements OnInit {
   logOut(){
     this.tokenService.removeToken();
   }
-  logIn(){
-    this.tokenService.setToken('LUCAS');
-  }
+  //logIn(){
+    //this.tokenService.setToken('LUCAS');
+  //  this.router.navigate(['/admin']);
+
+  //}
 
 }

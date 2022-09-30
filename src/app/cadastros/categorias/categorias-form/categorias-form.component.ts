@@ -17,6 +17,8 @@ export class CategoriasFormComponent implements OnInit {
 
   form!: FormGroup;
   submitted = false;
+  basePath = '/admin/categoria';
+
 
   constructor(
     private fb: FormBuilder,
@@ -63,6 +65,7 @@ export class CategoriasFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.form.reset;
+
 
   }
 
