@@ -1,3 +1,4 @@
+import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
 import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
   },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AppNavbarComponent },
+  { path: 'admin', component: HomeAdminComponent },
 
   { path: '', component: HomeComponent }
 ];
