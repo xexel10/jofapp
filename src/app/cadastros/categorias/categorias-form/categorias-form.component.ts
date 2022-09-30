@@ -5,7 +5,6 @@ import { Location } from '@angular/common';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CategoriaService } from './../categoria.service';
-import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-categorias-form',
@@ -51,13 +50,22 @@ export class CategoriasFormComponent implements OnInit {
         msgError = 'Erro ao atualizar categoria, tente novamente!';
       }
 
-      this.service.save(this.form.value).subscribe(
+      /*this.service.save(this.form.value).subscribe(
         success => {
           this.modal.showAlertSuccess(msgSuccess);
           this.location.back();
         },
         error => this.modal.showAlertDanger(msgError)
-      );
+      );*/
+
+      this.service.save(this.form.value).subscribe({
+        next: (v) => console.log(v),
+        error: (e) => this.modal.showAlertDanger(msgError),
+        complete: () => {
+          this.modal.showAlertSuccess(msgSuccess);
+          this.location.back();
+        }
+      });
 
     }
   }
