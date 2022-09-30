@@ -34,6 +34,8 @@ export class CategoriasListaComponent implements OnInit {
 
   ngOnInit() {
     this.onRefresh();
+    console.log('Route: ', this.router.url)
+
   }
 
   onRefresh() {

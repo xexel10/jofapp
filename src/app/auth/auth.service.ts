@@ -1,15 +1,20 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
 
   private userAutenticado: boolean = false;
 
   showMenuEmmiter = new EventEmitter<boolean>();
 
+  showHeaderPublic = new EventEmitter<boolean>();
+
   constructor(private router: Router) { }
+  ngOnInit(): void {
+    this.showHeaderPublic.emit(false);
+  }
 
   fazerLogin(email: string, password:string){
 

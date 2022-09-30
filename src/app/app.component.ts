@@ -1,5 +1,11 @@
 import { AuthService } from './auth/auth.service';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TokenService } from './auth/token/token.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -9,21 +15,26 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'jofapp';
 
+  name = 'Get Current Url Route Demo';
+  currentRoute: string = "";
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService, 
+    private tokenService: TokenService,
+    public router : Router
 
+  ) {
+
+
+  }
   ngOnInit(): void {
+    this.tokenService.setToken('LUCAS');
+
   }
 
-  isLoggedIn(){
-    if (this.authService.userIsAuth()){
-      return true;
-    } else{
-      return false;
+    isLogged(){
+      console.log('Retorno: ',this.tokenService.hasToken());
+        return this.tokenService.hasToken();
     }
-  }
-
 
 }

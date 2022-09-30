@@ -1,10 +1,10 @@
-<div *ngIf="!isLoggedIn()">
-    <app-header></app-header>
-    <app-home></app-home>
-</div>
-<div *ngIf="isLoggedIn()">
+<div *ngIf="isLogged(); else pagePublic">
     <app-app-navbar></app-app-navbar>
 </div>
+
+<ng-template #pagePublic>
+    <app-header></app-header>
+</ng-template>
 
 <div class="container">
     <router-outlet></router-outlet>

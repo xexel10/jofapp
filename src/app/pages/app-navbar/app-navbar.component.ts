@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-app-navbar',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.route.snapshot);
+  }
+
+  logOut(){
+    window.localStorage.removeItem('USER');
+
   }
 
 }
