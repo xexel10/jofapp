@@ -16,7 +16,7 @@ import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { CadastrosModule } from './cadastros/cadastros.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
-import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
+import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
     HeaderComponent,
     AppNavbarComponent,
     HomeComponent,
-    HomeAdminComponent
+    HomeAdminSidebarComponent
   ],
   imports: [
     BrowserModule,

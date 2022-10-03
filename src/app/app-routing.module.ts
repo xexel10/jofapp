@@ -1,4 +1,4 @@
-import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
+import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
   },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: HomeAdminComponent },
+  { path: 'admin', component: HomeAdminSidebarComponent },
 
   { path: '', component: HomeComponent }
 ];
