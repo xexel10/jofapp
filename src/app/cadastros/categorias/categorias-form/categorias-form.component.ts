@@ -50,14 +50,6 @@ export class CategoriasFormComponent implements OnInit {
         msgError = 'Erro ao atualizar categoria, tente novamente!';
       }
 
-      /*this.service.save(this.form.value).subscribe(
-        success => {
-          this.modal.showAlertSuccess(msgSuccess);
-          this.location.back();
-        },
-        error => this.modal.showAlertDanger(msgError)
-      );*/
-
       this.service.save(this.form.value).subscribe({
         next: (v) => console.log(v),
         error: (e) => this.modal.showAlertDanger(msgError),
@@ -73,8 +65,6 @@ export class CategoriasFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.form.reset;
-
-
   }
 
   hasError(field: string) {
