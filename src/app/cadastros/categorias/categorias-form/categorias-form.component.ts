@@ -65,8 +65,6 @@ export class CategoriasFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.form.reset;
-
-
   }
 
   hasError(field: string) {
