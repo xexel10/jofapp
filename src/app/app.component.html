@@ -1,9 +1,7 @@
 
+
 <div *ngIf="currentRoute.includes('/admin') && isLogged();">
       <app-app-navbar></app-app-navbar>
-      <div class="container">
-        <router-outlet></router-outlet>
-    </div>
 </div>
 <div *ngIf="currentRoute.includes('/admin') && !isLogged();">
     <div class="container">

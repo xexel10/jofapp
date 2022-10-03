@@ -1,6 +1,7 @@
+import { AppComponent } from './../../app.component';
 import { TokenService } from './../../auth/token/token.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-app-navbar',
@@ -8,8 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app-navbar.component.css']
 })
 export class AppNavbarComponent implements OnInit {
+  currentRoute: String;
+  constructor(private route: ActivatedRoute, private tokenService: TokenService, private router: Router, private app: AppComponent) {
 
-  constructor(private route: ActivatedRoute, private tokenService: TokenService, private router: Router) { }
+
+      this.currentRoute = this.app.currentRoute;
+   }
 
   ngOnInit(): void {
     console.log(this.route.snapshot);
