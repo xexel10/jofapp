@@ -21,15 +21,10 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: HomeAdminSidebarComponent, canActivate: [AuthGuard] },
-<<<<<<< HEAD
-  { path: '', component: HomeComponent },
-  { path: '**', component: PaginaNaoEncontradaComponent }
-=======
   { path: '', component: HomeComponent }
   //{ path: '**', component: PaginaNaoEncontradaComponent }
 
 
->>>>>>> 997b48f (Cadastro de Tipo de Imovel Concluido)
 ];
 
 @NgModule({
