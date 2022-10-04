@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { AppNavbarComponent } from './pages/app-navbar/app-navbar.component';
 import { NgModule } from '@angular/core';
@@ -15,8 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
   },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: HomeAdminSidebarComponent },
-
+  { path: 'admin', component: HomeAdminSidebarComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent }
 ];
 

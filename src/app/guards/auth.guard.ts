@@ -1,4 +1,4 @@
-//Angular route guards are interfaces provided by Angular which, when implemented, allow us to control 
+//Angular route guards are interfaces provided by Angular which, when implemented, allow us to control
 //the accessibility of a route based on conditions provided in class implementation of that interface.
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
@@ -20,18 +20,16 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ) : Observable<boolean> | boolean {
 
-    console.log('AuthGuard');
-
     return this.verificarAcesso();
   }
 
   private verificarAcesso(){
     if (this.authService.userIsAuth()){
       return true;
-    } 
+    }
 
     this.router.navigate(['/login']);
     return false;
   }
-  
+
 }
