@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { TokenService } from './../../../auth/token/token.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -25,6 +26,7 @@ export class CategoriasListaComponent implements OnInit {
   bsModalRef?: BsModalRef;
   basePath = '/admin/categoria'
   @ViewChild('deleteModal') deleteModal;
+  form!: FormGroup;
 
   constructor(
     private router: Router,
@@ -59,26 +61,6 @@ export class CategoriasListaComponent implements OnInit {
     this.router.navigate([this.basePath+'/editar', id], { relativeTo: this.route });
   }
 
-  onDelete(cat) {
-
-    this.categoriaSelecionada = cat;
-
-    const result$ = this.alertService.showConfirm('Confirmacao', 'Tem certeza que deseja remover esse curso?');
-    result$.asObservable()
-      .pipe(
-        take(1),
-        switchMap(result => result ? this.service.remove(cat.id) : EMPTY)
-      )
-      .subscribe(
-        success => {
-          this.onRefresh();
-        },
-        error => {
-          this.alertService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.');
-        }
-      );
-  }
-
   onConfirmDelete() {
 
   }
@@ -89,6 +71,27 @@ export class CategoriasListaComponent implements OnInit {
 
   handleError() {
     this.alertService.showAlertDanger('Erro ao carregar cursos. Tente novamente mais tarde.');
+  }
+
+
+  onDelete(cat) {
+
+    this.categoriaSelecionada = cat;
+
+    const result$ = this.alertService.showConfirm('Confirmacao', 'Tem certeza que deseja remover esse curso?');
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.service.remove(cat.id) : EMPTY)
+      )
+      .subscribe({
+        next: (v) => console.log(v),
+        error: (e) =>  this.alertService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.'),
+        complete: () => {
+          this.onRefresh();
+        }
+      });
+
   }
 
 

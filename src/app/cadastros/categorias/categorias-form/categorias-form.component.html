@@ -6,13 +6,14 @@
             class="form-control"
             id="nome"
             placeholder="Nome da Categoria"
-            formControlName="nome"
-            [ngClass]="{ 'is-invalid': submitted && hasError('categoria') }"
-            required>
-            <div class="invalid-feedback" *ngIf="hasError('categoria') && hasError('categoria')!['required']" >
-                Por favor informe um nome para o categoria.
-            </div>
+            formControlName="nome">
+            <app-campo-control-erro
+              [mostrarErro]="verificaValidTouched('nome')"
+              msgErro="Nome é Obrigatório">
+          </app-campo-control-erro>
     </div>
+
+
     <div class="col-sm-12">
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="status" formControlName="status">
@@ -21,6 +22,7 @@
             </label>
         </div>
     </div>
+
     <div class="col-12" style="margin-top: 10px;">
         <button class="btn btn-primary" type="submit" (click)="onSubmit()" >Salvar</button>
         <button class="btn btn-default" type="submit" (click)="onCancel()">Cancelar</button>

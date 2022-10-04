@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
@@ -41,6 +41,7 @@ export class CategoriasFormComponent implements OnInit {
   onSubmit() {
 
     this.submitted = true;
+
     if (this.form.valid) {
 
       let msgSuccess = 'Categoria criada com sucesso!';
@@ -59,16 +60,51 @@ export class CategoriasFormComponent implements OnInit {
         }
       });
 
+    }else{
+      this.verificaValidacoesForm(this.form);
     }
   }
 
   onCancel() {
     this.submitted = false;
     this.form.reset;
+    this.location.back();
   }
 
   hasError(field: string) {
     return this.form.get(field)?.errors;
+  }
+
+
+  resetar() {
+    this.form.reset();
+  }
+
+  verificaValidTouched(campo) {
+    return  !this.form.controls[campo].valid && (this.form.controls[campo].touched || this.form.controls[campo].dirty)
+  }
+
+  verificaRequired(campo) {
+    return this.form.controls[campo].hasError('required') && (this.form.controls[campo].touched || this.form.controls[campo].dirty)
+   }
+
+  aplicaCssErro(campo: string) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
+  }
+
+  verificaValidacoesForm(formGroup: FormGroup | FormArray) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      console.log(campo);
+      const controle = formGroup.get(campo);
+      controle?.markAsDirty();
+      controle?.markAsTouched();
+      if (controle instanceof FormGroup || controle instanceof FormArray) {
+        this.verificaValidacoesForm(controle);
+      }
+    });
   }
 
 }

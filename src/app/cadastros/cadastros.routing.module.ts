@@ -1,3 +1,4 @@
+import { AuthGuard } from './../guards/auth.guard';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,14 +16,16 @@ const routes: Routes = [
     component: CategoriasFormComponent,
     resolve: {
       categoria: CategoriaResolverGuard
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin/categoria/editar/:id',
     component: CategoriasFormComponent,
     resolve: {
       categoria: CategoriaResolverGuard
-    }
+    },
+    canActivate: [AuthGuard]
   }
 ];
 
