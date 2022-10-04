@@ -1,14 +1,15 @@
+
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { CadastrosRoutingModule } from './cadastros.routing.module';
-import { SharedModule } from './../shared/shared.module';
-
-import { CategoriasListaComponent } from './categorias/categorias-lista/categorias-lista.component';
-import { CategoriasFormComponent } from './categorias/categorias-form/categorias-form.component';
+import { SharedModule } from './../../shared/shared.module';
+import { CategoriaRoutingModule } from './categoria.routing.module';
+import { CategoriasListaComponent } from './categorias-lista/categorias-lista.component';
+import { CategoriasFormComponent } from './categorias-form/categorias-form.component';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { CategoriasFormComponent } from './categorias/categorias-form/categorias
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    CadastrosRoutingModule
+    CategoriaRoutingModule
   ]
 })
-export class CadastrosModule { }
+export class CategoriaModule { }
