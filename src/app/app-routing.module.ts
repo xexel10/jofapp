@@ -13,12 +13,23 @@ const routes: Routes = [
 
   {
     path: 'admin/categoria',
-    loadChildren: () => import('./cadastros/cadastros.module').then(m => m.CadastrosModule)
+    loadChildren: () => import('./cadastros/categorias/categoria.module').then(m => m.CategoriaModule)
+  },
+  {
+    path: 'admin/tipo-imovel',
+    loadChildren: () => import('./cadastros/tipo-imovel/tipo-imovel.module').then(m => m.TipoImovelModule)
   },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: HomeAdminSidebarComponent, canActivate: [AuthGuard] },
+<<<<<<< HEAD
   { path: '', component: HomeComponent },
   { path: '**', component: PaginaNaoEncontradaComponent }
+=======
+  { path: '', component: HomeComponent }
+  //{ path: '**', component: PaginaNaoEncontradaComponent }
+
+
+>>>>>>> 997b48f (Cadastro de Tipo de Imovel Concluido)
 ];
 
 @NgModule({
