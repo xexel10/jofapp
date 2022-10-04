@@ -19,7 +19,13 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { AdminComponent } from './pages/admin/admin.component';
+<<<<<<< HEAD
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
+=======
+import { ImoveisComponent } from './cadastros/imoveis/imoveis.component';
+import { ImoveisListaComponent } from './cadastros/imoveis/imoveis-lista/imoveis-lista.component';
+import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-form.component';
+>>>>>>> 61d8137 (Criado Componente de Cadastro de Imoveis)
 
 
 @NgModule({
@@ -30,8 +36,16 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
     AppNavbarComponent,
     HomeComponent,
     HomeAdminSidebarComponent,
+<<<<<<< HEAD
     AdminComponent,
     PaginaNaoEncontradaComponent
+=======
+    PaginaNaoEncontradaComponent,
+    AdminComponent,
+    ImoveisComponent,
+    ImoveisListaComponent,
+    ImoveisFormComponent
+>>>>>>> 61d8137 (Criado Componente de Cadastro de Imoveis)
   ],
   imports: [
     BrowserModule,

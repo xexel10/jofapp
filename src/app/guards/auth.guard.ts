@@ -2,14 +2,14 @@ import { TokenService } from './../auth/token/token.service';
 //Angular route guards are interfaces provided by Angular which, when implemented, allow us to control
 //the accessibility of a route based on conditions provided in class implementation of that interface.
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Route, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 
 
 import { AuthService } from './../auth/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
 
   constructor(
     private authService: AuthService,
@@ -35,5 +35,12 @@ export class AuthGuard implements CanActivate {
     console.log('auth guard redirect')
     return false;
   }
+
+    //não deixa baixar o código chunck
+   	canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
+      console.log('canLoad: verificando se usuário pode carregar o cod módulo');
+
+      return this.verificarAcesso();
+    }
 
 }
