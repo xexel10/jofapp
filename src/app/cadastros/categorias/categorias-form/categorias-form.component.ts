@@ -1,3 +1,4 @@
+import { Categoria } from './../../../models/categoria';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { Location } from '@angular/common';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CategoriaService } from './../categoria.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categorias-form',
@@ -18,6 +20,9 @@ export class CategoriasFormComponent implements OnInit {
   submitted = false;
   basePath = '/admin/categoria';
 
+  categoria!: Categoria;
+  inscricao!: Subscription;
+
 
   constructor(
     private fb: FormBuilder,
@@ -28,12 +33,17 @@ export class CategoriasFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const categoria = this.route.snapshot.data['categoria'];
+    this.inscricao = this.route.data.subscribe(
+      (data) => {
+        console.log('Recebendo o obj Aluno do resolver');
+        this.categoria = data['categoria'];
+      }
+    );
 
-    this.form = this.fb.group({
-      id: [categoria.id],
-      nome: [categoria.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
-      status: [categoria.status]
+   this.form = this.fb.group({
+      id: [this.categoria.id],
+      nome: [this.categoria.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
+      status: [this.categoria.status]
     });
 
   }
