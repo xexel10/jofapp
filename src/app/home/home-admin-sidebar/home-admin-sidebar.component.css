@@ -1,15 +1,19 @@
-
-.list-group-item {
-  font-size: 20px;
+menu {
+  font-size: 1.2rem !important;
+}
+.submenu {
+  font-size: 1rem !important;
 }
 
 .navbar-toggler-icon {
-  background-image: url("../../../assets/images/svg/list-nested.svg");
-  stroke: rgba(255, 102, 203, 0.5);
-
-
+  background-image: url("../../../assets/images/svg/list.svg");
+  filter: invert(84%) sepia(100%) saturate(0%) hue-rotate(332deg) brightness(108%) contrast(101%);
+  /*codepen  https://codepen.io/sosuke/pen/Pjoqqp*/
 }
-
+.navbar-toggler-icon:hover {
+  background-image: url("../../../assets/images/svg/list-nested.svg");
+  filter: invert(84%) sepia(100%) saturate(0%) hue-rotate(332deg) brightness(108%) contrast(101%);
+}
 
 
 
@@ -33,7 +37,7 @@
 .sidebar a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 1.2rem;
   color: #818181;
   display: block;
   transition: 0.3s;
