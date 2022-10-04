@@ -20,6 +20,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ImoveisComponent } from './cadastros/imoveis/imoveis.component';
+import { ImoveisListaComponent } from './cadastros/imoveis/imoveis-lista/imoveis-lista.component';
+import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-form.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { AdminComponent } from './pages/admin/admin.component';
     HomeComponent,
     HomeAdminSidebarComponent,
     PaginaNaoEncontradaComponent,
-    AdminComponent
+    AdminComponent,
+    ImoveisComponent,
+    ImoveisListaComponent,
+    ImoveisFormComponent
   ],
   imports: [
     BrowserModule,
