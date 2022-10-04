@@ -1,3 +1,4 @@
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -18,14 +19,7 @@ import { CategoriaModule } from './cadastros/categorias/categoria.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
-import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
-<<<<<<< HEAD
-import { ImovelModule } from './cadastros/imoveis/imovel.module';
-
-=======
-import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
->>>>>>> 88a2507 (pagina-nao-encontrada-ok)
 
 
 @NgModule({
@@ -36,7 +30,6 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
     AppNavbarComponent,
     HomeComponent,
     HomeAdminSidebarComponent,
-    PaginaNaoEncontradaComponent,
     AdminComponent
   ],
   imports: [
@@ -47,12 +40,8 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
     AppRoutingModule,
     AuthModule,
     CategoriaModule,
-<<<<<<< HEAD
     SharedModule,
     ImovelModule
-=======
-    SharedModule
->>>>>>> 5674f7a (Cadastro de Tipo de Imovel Concluido)
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
