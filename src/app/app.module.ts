@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -46,8 +47,12 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
     AppRoutingModule,
     AuthModule,
     CategoriaModule,
+<<<<<<< HEAD
     SharedModule,
     ImovelModule
+=======
+    SharedModule
+>>>>>>> 5674f7a (Cadastro de Tipo de Imovel Concluido)
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
