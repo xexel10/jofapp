@@ -19,8 +19,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
+<<<<<<< HEAD
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 
+=======
+import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
+>>>>>>> 88a2507 (pagina-nao-encontrada-ok)
 
 
 @NgModule({
