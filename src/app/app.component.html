@@ -1,11 +1,18 @@
 
-
-<div *ngIf="currentRoute.includes('/admin') && isLogged();">
-      <app-app-navbar></app-app-navbar>
+<div *ngIf="currentRoute.includes('/admin') && isLogged()">
+  <div class="container-fluid ps-0 pe-0  divGeral">
+      <div id="divPainel">
+        <app-admin></app-admin>
+      </div>
+      <div *ngIf="currentRoute!='/admin'" id="divRota">
+          <router-outlet></router-outlet>
+      </div>
+  </div>
 </div>
-<div *ngIf="currentRoute.includes('/admin') && !isLogged();">
-    <div class="container">
-      <router-outlet></router-outlet>
+
+<div *ngIf="currentRoute.includes('/admin') && !isLogged()">
+  <div class="container">
+    <router-outlet></router-outlet>
   </div>
 </div>
 <div *ngIf="currentRoute.includes('/login')">
@@ -14,13 +21,9 @@
   </div>
 </div>
 
-
-<div *ngIf="!currentRoute.includes('/admin') && !currentRoute.includes('/login')">
+<div
+  *ngIf="!currentRoute.includes('/admin') && !currentRoute.includes('/login')"
+>
   <app-header></app-header>
   <router-outlet></router-outlet>
 </div>
-
-
-
-
-

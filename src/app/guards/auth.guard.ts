@@ -1,3 +1,4 @@
+import { TokenService } from './../auth/token/token.service';
 //Angular route guards are interfaces provided by Angular which, when implemented, allow us to control
 //the accessibility of a route based on conditions provided in class implementation of that interface.
 import { Injectable } from '@angular/core';
@@ -12,7 +13,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router, private tokenService: TokenService
   ) { }
 
   canActivate(
@@ -23,11 +24,15 @@ export class AuthGuard implements CanActivate {
   }
 
   private verificarAcesso(){
-    if (this.authService.userIsAuth()){
-      return true;
-    }
+    //if (this.authService.userIsAuth()){
+    //  return true;
+   // }
+   if (this.tokenService.hasToken()){
+    return true;
+   }
 
     this.router.navigate(['/login']);
+    console.log('auth guard redirect')
     return false;
   }
 

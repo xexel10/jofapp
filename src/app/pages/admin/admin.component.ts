@@ -1,14 +1,14 @@
 import { AppComponent } from './../../app.component';
 import { TokenService } from './../../auth/token/token.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-app-navbar',
-  templateUrl: './app-navbar.component.html',
-  styleUrls: ['./app-navbar.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AppNavbarComponent implements OnInit {
+export class AdminComponent implements OnInit {
   currentRoute: String;
   constructor(private route: ActivatedRoute, private tokenService: TokenService, private router: Router, private app: AppComponent) {
 
@@ -31,6 +31,10 @@ export class AppNavbarComponent implements OnInit {
     this.router.navigate(['/']);
 
 
+  }
+
+  categorias(){
+    this.router.navigate(['/admin/categoria'])
   }
 
 }
