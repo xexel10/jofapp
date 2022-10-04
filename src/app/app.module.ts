@@ -29,7 +29,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     AppNavbarComponent,
     HomeComponent,
     HomeAdminSidebarComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
     AdminComponent
   ],
   imports: [
