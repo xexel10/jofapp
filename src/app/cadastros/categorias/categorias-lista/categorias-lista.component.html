@@ -1,55 +1,53 @@
-
 <div class="card mt-3">
-    <div class="card-header">
-      <div class="float-left">
-        <h4>Categorias</h4>
-      </div>
-      <div class="float-right">
-        <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Categoria</button>
-        <!--<button type="button" class="btn btn-secondary" >Atualizar</button>-->
-      </div>
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Categorias</h4>
     </div>
-    <div class="card-body">
-      <table class="table table-hover" *ngIf="categorias$ | async as categorias; else loading">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let cat of categorias">
-            <td>{{ cat.id }}</td>
-            <td>{{ cat.nome }}</td>
-            <td>{{ cat.status }}</td>
-            <td>
-              <span class="float-right">
-                <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(cat.id)">
-                  Atualizar
-                </button>
-
-                <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(cat)">
-                  Remover
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <ng-template #loading>
-        <span>Carregando categorias...</span>
-      </ng-template>
-
+    <div class="float-right">
+      <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Categoria</button>
     </div>
   </div>
+  <div class="card-body">
+    <table class="table table-hover" *ngIf="categorias$ | async as categorias; else loading">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Categoria</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categorias">
+          <td>{{ cat.id }}</td>
+          <td>{{ cat.nome }}</td>
+          <td><input [checked]="cat.status" class="check-box" disabled type="checkbox"></td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(cat.id)">
+                Atualizar
+              </button>
 
-  <ng-template #deleteModal>
-    <div class="modal-body text-center">
-      <p>Tem certeza que deseja remover esse curso?</p>
-      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
-    </div>
-  </ng-template>
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(cat)">
+                Remover
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loading>
+      <span>Carregando categorias...</span>
+    </ng-template>
+
+  </div>
+</div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse curso?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+  </div>
+</ng-template>

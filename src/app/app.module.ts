@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
+
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     AppRoutingModule,
     AuthModule,
     CategoriaModule,
-    SharedModule
+    SharedModule,
+    ImovelModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

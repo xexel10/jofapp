@@ -1,0 +1,30 @@
+<form class="row g-3 needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+    <div class="col-sm-12">
+        <label for="categoria" class="form-label">Nome da Categoria</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nome"
+            placeholder="Nome da Categoria"
+            formControlName="nome">
+            <app-campo-control-erro
+              [mostrarErro]="verificaValidTouched('nome')"
+              msgErro="Nome é Obrigatório">
+          </app-campo-control-erro>
+    </div>
+
+
+    <div class="col-sm-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="status" formControlName="status">
+            <label class="form-check-label">
+                Status
+            </label>
+        </div>
+    </div>
+
+    <div class="col-12" style="margin-top: 10px;">
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()" >Salvar</button>
+        <button class="btn btn-default" type="submit" (click)="onCancel()">Cancelar</button>
+    </div>
+</form>

@@ -1,33 +1,31 @@
+import { Imovel } from './../../../models/imovel';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { CategoriaService } from './../categoria.service';
-import { Categoria } from './../../../models/categoria';
-
+import { ImovelService } from './../imovel.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-categorias-form',
-  templateUrl: './categorias-form.component.html',
-  styleUrls: ['./categorias-form.component.css']
+  selector: 'app-imoveis-form',
+  templateUrl: './imoveis-form.component.html',
+  styleUrls: ['./imoveis-form.component.css']
 })
-
-export class CategoriasFormComponent implements OnInit {
+export class ImoveisFormComponent implements OnInit {
 
   form!: FormGroup;
   submitted = false;
-  basePath = '/admin/categoria';
+  basePath = '/admin/imovel';
 
-  categoria!: Categoria;
+  imovel!: Imovel;
   inscricao!: Subscription;
 
 
   constructor(
     private fb: FormBuilder,
-    private service: CategoriaService,
+    private service: ImovelService,
     private modal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute) { }
@@ -36,14 +34,14 @@ export class CategoriasFormComponent implements OnInit {
 
     this.inscricao = this.route.data.subscribe(
       (data) => {
-        this.categoria = data['categoria'];
+        console.log('Recebendo o obj Aluno do resolver');
+        this.imovel = data['imovel'];
       }
     );
 
    this.form = this.fb.group({
-      id: [this.categoria.id],
-      nome: [this.categoria.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
-      status: [this.categoria.status]
+      id: [this.imovel.id],
+      nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
     });
 
   }
@@ -54,11 +52,11 @@ export class CategoriasFormComponent implements OnInit {
 
     if (this.form.valid) {
 
-      let msgSuccess = 'Categoria criada com sucesso!';
-      let msgError = 'Erro ao criar categoria, tente novamente!';
+      let msgSuccess = 'Imóvel criada com sucesso!';
+      let msgError = 'Erro ao criar imóvel, tente novamente!';
       if (this.form.value.id) {
         msgSuccess = 'Categoria atualizada com sucesso!';
-        msgError = 'Erro ao atualizar categoria, tente novamente!';
+        msgError = 'Erro ao atualizar imovel, tente novamente!';
       }
 
       this.service.save(this.form.value).subscribe({

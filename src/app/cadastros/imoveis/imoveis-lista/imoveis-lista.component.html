@@ -1,0 +1,56 @@
+
+<div class="card mt-3">
+    <div class="card-header">
+      <div class="float-left">
+        <h4>Imóveis</h4>
+      </div>
+      <div class="float-right">
+        <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Imóvel</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" *ngIf="imoveis$ | async as imoveis; else loading">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Tipo Imóvel</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let imovel of imoveis">
+            <td>{{ imovel.id }}</td>
+            <td>{{ imovel.nome }}</td>
+            <td>{{ imovel.categoria }}</td>
+            <td>{{ imovel.tipoImovel }}</td>
+            <td>
+              <span class="float-right">
+                <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(imovel.id)">
+                  Atualizar
+                </button>
+
+                <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(imovel)">
+                  Remover
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #loading>
+        <span>Carregando imóveis...</span>
+      </ng-template>
+
+    </div>
+  </div>
+
+  <ng-template #deleteModal>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja remover esse imóvel?</p>
+      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+    </div>
+  </ng-template>
