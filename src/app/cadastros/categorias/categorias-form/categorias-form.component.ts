@@ -1,12 +1,13 @@
-import { Categoria } from './../../../models/categoria';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CategoriaService } from './../categoria.service';
-import { Subscription } from 'rxjs';
+import { Categoria } from './../../../models/categoria';
+
 
 @Component({
   selector: 'app-categorias-form',
@@ -35,7 +36,6 @@ export class CategoriasFormComponent implements OnInit {
 
     this.inscricao = this.route.data.subscribe(
       (data) => {
-        console.log('Recebendo o obj Aluno do resolver');
         this.categoria = data['categoria'];
       }
     );
