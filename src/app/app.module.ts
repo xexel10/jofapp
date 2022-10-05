@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,12 +19,17 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { AdminComponent } from './pages/admin/admin.component';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 =======
 import { ImoveisComponent } from './cadastros/imoveis/imoveis.component';
 import { ImoveisListaComponent } from './cadastros/imoveis/imoveis-lista/imoveis-lista.component';
 import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-form.component';
 >>>>>>> 61d8137 (Criado Componente de Cadastro de Imoveis)
+=======
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
+
+>>>>>>> a7d77e1 (Imoveis Lista Quase Ok)
 
 
 @NgModule({
@@ -41,11 +45,15 @@ import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-f
     PaginaNaoEncontradaComponent
 =======
     PaginaNaoEncontradaComponent,
+<<<<<<< HEAD
     AdminComponent,
     ImoveisComponent,
     ImoveisListaComponent,
     ImoveisFormComponent
 >>>>>>> 61d8137 (Criado Componente de Cadastro de Imoveis)
+=======
+    AdminComponent
+>>>>>>> a7d77e1 (Imoveis Lista Quase Ok)
   ],
   imports: [
     BrowserModule,
@@ -55,7 +63,8 @@ import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-f
     AppRoutingModule,
     AuthModule,
     CategoriaModule,
-    SharedModule
+    SharedModule,
+    ImovelModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
