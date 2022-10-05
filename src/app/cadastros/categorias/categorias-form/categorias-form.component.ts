@@ -1,4 +1,3 @@
-import { Categoria } from './../../../models/categoria';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -7,12 +6,8 @@ import { Subscription } from 'rxjs';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CategoriaService } from './../categoria.service';
-<<<<<<< HEAD
 import { Categoria } from './../../../models/categoria';
 
-=======
-import { Subscription } from 'rxjs';
->>>>>>> 596008b (subscribe edit categoria)
 
 @Component({
   selector: 'app-categorias-form',
