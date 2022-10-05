@@ -23,7 +23,7 @@
           <tr *ngFor="let cat of categorias">
             <td>{{ cat.id }}</td>
             <td>{{ cat.nome }}</td>
-            <td>{{ cat.status }}</td>
+            <td><input [checked]="cat.status" class="check-box" disabled type="checkbox"></td>
             <td>
               <span class="float-right">
                 <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(cat.id)">

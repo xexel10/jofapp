@@ -1,5 +1,3 @@
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +8,8 @@ import { SharedModule } from './../../shared/shared.module';
 import { CategoriaRoutingModule } from './categoria.routing.module';
 import { CategoriasListaComponent } from './categorias-lista/categorias-lista.component';
 import { CategoriasFormComponent } from './categorias-form/categorias-form.component';
+import { CategoriaService } from './categoria.service';
+
 
 
 @NgModule({
@@ -24,6 +24,7 @@ import { CategoriasFormComponent } from './categorias-form/categorias-form.compo
     ReactiveFormsModule,
     SharedModule,
     CategoriaRoutingModule
-  ]
+  ],
+  providers: [CategoriaService],
 })
 export class CategoriaModule { }

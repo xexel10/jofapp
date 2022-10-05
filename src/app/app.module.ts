@@ -1,4 +1,3 @@
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,9 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import { ImoveisComponent } from './cadastros/imoveis/imoveis.component';
-import { ImoveisListaComponent } from './cadastros/imoveis/imoveis-lista/imoveis-lista.component';
-import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-form.component';
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
+
 
 
 @NgModule({
@@ -34,10 +32,7 @@ import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-f
     HomeComponent,
     HomeAdminSidebarComponent,
     PaginaNaoEncontradaComponent,
-    AdminComponent,
-    ImoveisComponent,
-    ImoveisListaComponent,
-    ImoveisFormComponent
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +42,8 @@ import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-f
     AppRoutingModule,
     AuthModule,
     CategoriaModule,
-    SharedModule
+    SharedModule,
+    ImovelModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
