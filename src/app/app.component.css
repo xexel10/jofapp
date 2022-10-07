@@ -5,11 +5,23 @@
 }
 
 #divPainel {
-  width: 20%;
+  width: 100vw;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 #divRota{
-  width: 80%;
+  margin: 10px;
+  width: auto;
+
 }
 .divGeral {
   display: flex;
+}
+
+.rota {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

@@ -1,4 +1,113 @@
 <!-- JavaScript Bundle with Popper -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <form class="form-inline my-2 my-lg-0">
+    <a id="botaoMenu"  (click)="mudarNav()"
+     class="btn my-2 my-sm-0 ms-2 me-2" [ngClass]="{'btn-close': !mostrarMenu, 'btn-close-white': !mostrarMenu, 'navbar-toggler-icon': mostrarMenu}">  </a>
+  </form>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  </button>
+  <div class="" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+ <div id="mySidebar" #sideBar class="sidebar nav-brand bg-dark" >
+  <a role="button" class="menu">Home</a>
+  <a class="menu" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+     Cadastros
+  </a>
+  <div class="collapse" id="collapseExample">
+    <ul class="list-group">
+      <li class="list-group-item bg-dark "><a class="submenu" routerLink="/admin/categoria">Categorias</a></li>
+      <li  class="list-group-item bg-dark"><a class="submenu" href="#">Tipo Imóveis</a></li>
+      <li  class="list-group-item bg-dark"><a class="submenu" href="#">Imóveis</a></li>
+      <li  class="list-group-item bg-dark"><a class="submenu" href="#">Usuários</a></li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    PAINEL ADMIN 04-10 JavaScript Bundle with Popper
 
 <div class="container-fluid ps-0 pe-1">
   <div>
@@ -35,25 +144,6 @@
                       </ul>
                   </li>
 
-               <!--   <li>
-                      <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle list-group-item">
-                          <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Cadastros</span> </a>
-                          <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                          <li class="w-100">
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Categorias</span> 1</a>
-                          </li>
-                          <li>
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Imóveis</span> 2</a>
-                          </li>
-                          <li>
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Tipo de imóveis</span> 3</a>
-                          </li>
-                          <li>
-                              <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">   Grupos</span> 4</a>
-                          </li>
-                      </ul>
-                  </li>
-                  -->
 
               </ul>
               <hr>
@@ -73,6 +163,42 @@
               </div>
           </div>
       </div>
+
+
+
+
+
+FIM PAINEL ADMIN 04-10 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- <div class="col py-3">
         <div *ngIf="currentRoute!='/admin'">
