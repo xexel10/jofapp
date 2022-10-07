@@ -33,7 +33,7 @@ menu {
   margin-top: 56px;
 }
 
-/* The sidebar links */
+/* The sidebar links ----- Menus Laterais */
 .sidebar a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -43,8 +43,13 @@ menu {
   transition: 0.3s;
 }
 
-#botaoMenu :hover {
-  border:none!important
+#botaoMenu:hover {
+  border:none!important;
+  font-size: 1.2rem !important;
+
+}
+#botaoMenu {
+  border: none!important;
 }
 
 
@@ -53,36 +58,10 @@ menu {
   color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
 
-#btFechar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
 
-/* The button used to open the sidebar */
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
 
-.openbtn:hover {
-  background-color: #444;
-}
+
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {

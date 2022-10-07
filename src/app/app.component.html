@@ -1,15 +1,15 @@
-<app-home-admin-sidebar></app-home-admin-sidebar>
-<!--
 
 <div *ngIf="currentRoute.includes('/admin') && isLogged()">
-  <div class="container-fluid ps-0 pe-0  divGeral">
+  <div class="container-fluid ps-0 pe-0  ">
       <div id="divPainel">
-        <app-admin></app-admin>
+        <div class="col">
+          <app-admin></app-admin>
+        </div>
       </div>
-      <div *ngIf="currentRoute!='/admin'" id="divRota">
+      <div *ngIf="currentRoute!='/admin'" id="divRota" #divRota class="">
           <router-outlet></router-outlet>
+    </div>
       </div>
-  </div>
 </div>
 
 <div *ngIf="currentRoute.includes('/admin') && !isLogged()">
@@ -30,4 +30,3 @@
   <router-outlet></router-outlet>
 </div>
 
--->

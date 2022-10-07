@@ -1,5 +1,5 @@
 import { AuthService } from './auth/auth.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { TokenService } from './auth/token/token.service';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 
@@ -16,6 +16,8 @@ export class AppComponent {
 
   name = 'Get Current Url Route Demo';
   currentRoute: string = "";
+  @ViewChild('divRota') divRota! : ElementRef;
+
 
   constructor(
     private authService: AuthService,
