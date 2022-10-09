@@ -1,5 +1,3 @@
-import { ImovelModule } from './cadastros/imoveis/imovel.module';
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -19,11 +17,9 @@ import { CategoriaModule } from './cadastros/categorias/categoria.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
-<<<<<<< HEAD
 import { AdminComponent } from './pages/admin/admin.component';
-=======
->>>>>>> f455b9d (Admin Mergeado)
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
+
 
 @NgModule({
   declarations: [
