@@ -19,7 +19,10 @@ import { CategoriaModule } from './cadastros/categorias/categoria.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
+<<<<<<< HEAD
 import { AdminComponent } from './pages/admin/admin.component';
+=======
+>>>>>>> f455b9d (Admin Mergeado)
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 
 @NgModule({
@@ -48,6 +51,3 @@ import { ImovelModule } from './cadastros/imoveis/imovel.module';
 })
 
 export class AppModule {}
-
-/* Package.jon para cors */
-/*--proxy-config proxy.conf.js*/
