@@ -17,7 +17,9 @@ import { CategoriaModule } from './cadastros/categorias/categoria.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
+import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { AdminComponent } from './pages/admin/admin.component';
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
@@ -30,6 +32,10 @@ import { ImoveisFormComponent } from './cadastros/imoveis/imoveis-form/imoveis-f
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 
 >>>>>>> a7d77e1 (Imoveis Lista Quase Ok)
+=======
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
+
+>>>>>>> 5f7a0183a5475a3233723783d98f089f8df8413e
 
 
 @NgModule({
@@ -40,6 +46,7 @@ import { ImovelModule } from './cadastros/imoveis/imovel.module';
     AppNavbarComponent,
     HomeComponent,
     HomeAdminSidebarComponent,
+<<<<<<< HEAD
 <<<<<<< HEAD
     AdminComponent,
     PaginaNaoEncontradaComponent
@@ -52,6 +59,9 @@ import { ImovelModule } from './cadastros/imoveis/imovel.module';
     ImoveisFormComponent
 >>>>>>> 61d8137 (Criado Componente de Cadastro de Imoveis)
 =======
+=======
+    PaginaNaoEncontradaComponent,
+>>>>>>> 5f7a0183a5475a3233723783d98f089f8df8413e
     AdminComponent
 >>>>>>> a7d77e1 (Imoveis Lista Quase Ok)
   ],
