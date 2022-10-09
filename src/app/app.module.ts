@@ -18,6 +18,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ImovelModule } from './cadastros/imoveis/imovel.module';
     HeaderComponent,
     AppNavbarComponent,
     HomeComponent,
-    HomeAdminSidebarComponent
+    HomeAdminSidebarComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
