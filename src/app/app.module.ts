@@ -17,9 +17,14 @@ import { CategoriaModule } from './cadastros/categorias/categoria.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
+<<<<<<< HEAD
 import { AdminComponent } from './pages/admin/admin.component';
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 
+=======
+import { ImovelModule } from './cadastros/imoveis/imovel.module';
+import { AdminComponent } from './pages/admin/admin.component';
+>>>>>>> 6bd5cfbe6f25c9d47cd17f7a600d612290b5c93b
 
 @NgModule({
   declarations: [
