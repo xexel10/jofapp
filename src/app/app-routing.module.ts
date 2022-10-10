@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./cadastros/tipo-imovel/tipo-imovel.module').then(m => m.TipoImovelModule)
   },
   {
-    path: 'admin/imovel',
+    path: ' ',
     loadChildren: () => import('./cadastros/imoveis/imovel.module').then(m => m.ImovelModule)
   },
   { path: 'login', component: LoginComponent },
