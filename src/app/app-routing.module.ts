@@ -21,13 +21,8 @@ const routes: Routes = [
     path: 'admin/imovel',
     loadChildren: () => import('./cadastros/tipo-imovel/tipo-imovel.module').then(m => m.TipoImovelModule)
   },
-  {
-    path: ' ',
-    loadChildren: () => import('./cadastros/imoveis/imovel.module').then(m => m.ImovelModule)
-  },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: HomeAdminSidebarComponent, canActivate: [AuthGuard] },
-
   { path: '', component: HomeComponent },
 
 
