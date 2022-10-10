@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -16,6 +15,10 @@ const routes: Routes = [
   },
   {
     path: 'admin/tipo-imovel',
+    loadChildren: () => import('./cadastros/imoveis/imovel.module').then(m => m.ImovelModule)
+  },
+  {
+    path: 'admin/imovel',
     loadChildren: () => import('./cadastros/tipo-imovel/tipo-imovel.module').then(m => m.TipoImovelModule)
   },
   {
