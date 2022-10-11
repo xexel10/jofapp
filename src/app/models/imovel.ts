@@ -1,8 +1,11 @@
+import { Foto } from './foto';
+
 export interface Imovel {
     id: number;
     nome: string;
     descricao: string;
-    //fotos: Foto[];
+    fotos: Foto[];
     categoria: number;
     tipoImovel: number;
+
 }

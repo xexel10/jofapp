@@ -5,11 +5,13 @@ import { Location } from '@angular/common';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ImovelService } from './../imovel.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { TipoImovel } from './../../../models/tipo-imovel';
 import { Imovel } from './../../../models/imovel';
 import { TipoImovelService } from './../../tipo-imovel/tipo-imovel.service';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriaService } from './../../categorias/categoria.service';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -23,8 +25,10 @@ export class ImoveisFormComponent implements OnInit {
   basePath = '/admin/imovel';
 
   imovel!: Imovel;
-  tipoImovel!: TipoImovel[];
+  // tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
+  tipoImovel!: Observable<TipoImovel[]>;
+  categoria!:Observable<Categoria>;
 
 
   constructor(
@@ -43,9 +47,12 @@ export class ImoveisFormComponent implements OnInit {
       }
     );
 
-    this.tipoImovelService.list().subscribe(dados =>{
-      this.tipoImovel = dados;
-    })
+    this.tipoImovel = this.tipoImovelService.list();
+    //this.categoria = this.CategoriaService.list();
+
+    // this.tipoImovelService.list().subscribe(dados =>{
+    //   this.tipoImovel = dados;
+    // });
 
    this.form = this.fb.group({
       id: [this.imovel.id],
