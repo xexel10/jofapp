@@ -48,11 +48,6 @@ export class ImoveisFormComponent implements OnInit {
     );
 
     this.tipoImovel = this.tipoImovelService.list();
-    //this.categoria = this.CategoriaService.list();
-
-    // this.tipoImovelService.list().subscribe(dados =>{
-    //   this.tipoImovel = dados;
-    // });
 
    this.form = this.fb.group({
       id: [this.imovel.id],

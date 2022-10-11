@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ImoveisFormComponent } from './imoveis-form/imoveis-form.component';
 import { ImoveisListaComponent } from './imoveis-lista/imoveis-lista.component';
-import { CategoriaResolverGuard } from './guards/categoria-resolver.guard';
+import { ImovelResolverGuard } from './guards/imovel-resolver.guard';
 
 /* Rotas hard code vem primeiro, como no exemple da rota novo. */
 /*Poderiamos tb utilizar as rotas filhas caso necessário nesse routing, muito utilizado em telas mestre-detalhe */
@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'novo',
     component: ImoveisFormComponent,
     resolve: {
-      imovel: CategoriaResolverGuard
+      imovel: ImovelResolverGuard
     },
     canActivate: [AuthGuard]
   },
@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'editar/:id',
     component: ImoveisFormComponent,
     resolve: {
-      imovel: CategoriaResolverGuard
+      imovel: ImovelResolverGuard
     },
     canActivate: [AuthGuard]
   }
