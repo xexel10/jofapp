@@ -1,4 +1,3 @@
-import { Imovel } from './../../../models/imovel';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +6,10 @@ import { Location } from '@angular/common';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ImovelService } from './../imovel.service';
 import { Subscription } from 'rxjs';
+
+import { TipoImovel } from './../../../models/tipo-imovel';
+import { Imovel } from './../../../models/imovel';
+import { TipoImovelService } from './../../tipo-imovel/tipo-imovel.service';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -20,12 +23,14 @@ export class ImoveisFormComponent implements OnInit {
   basePath = '/admin/imovel';
 
   imovel!: Imovel;
+  tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
 
 
   constructor(
     private fb: FormBuilder,
     private service: ImovelService,
+    private tipoImovelService: TipoImovelService,
     private modal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute) { }
@@ -34,14 +39,21 @@ export class ImoveisFormComponent implements OnInit {
 
     this.inscricao = this.route.data.subscribe(
       (data) => {
-        console.log('Recebendo o obj Aluno do resolver');
         this.imovel = data['imovel'];
       }
     );
 
+    this.tipoImovelService.list().subscribe(dados =>{
+      this.tipoImovel = dados;
+    })
+
    this.form = this.fb.group({
       id: [this.imovel.id],
-      nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
+      nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
+      descricao: [this.imovel.nome],
+      tipoImovel: [this.imovel.nome],
+      categoria: [this.imovel.nome]
+
     });
 
   }
