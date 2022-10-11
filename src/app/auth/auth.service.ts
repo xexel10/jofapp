@@ -27,7 +27,8 @@ export class AuthService implements OnInit {
           this.acessToken = token['access'];
           console.log('ACESS TOKEN GERADO: ',this.acessToken)
           console.log("Dentro do observable ", token['access']);
-          this.tokenService.setToken(this.acessToken);
+          this.tokenService.setToken(this.acessToken, token['refresh'])
+          ;
           this.userAutenticado = true;
           this.router.navigate(['/admin']);
 

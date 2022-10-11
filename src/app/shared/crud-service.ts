@@ -4,15 +4,18 @@ import { delay, tap, take } from 'rxjs/operators';
 import { TokenService } from '../auth/token/token.service';
 
 export class CrudService<T> {
-  tokenService! : TokenService;
-  acessToken: string = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1NTE1NjM3LCJpYXQiOjE2NjU1MTUzMzcsImp0aSI6ImQ0MDI4Y2E3ZmQ4NjRjYjI5MjU4NzIxYzc2YTdiYjgzIiwidXNlcl9pZCI6MX0.59kLu0DETYSYfLhAQ0sDV0g8JoMbWR8GpCL3HesOQ5w'
-  constructor(protected http: HttpClient, private API_URL, private TOKEN) {}
+  //tokenService! : TokenService;
+  constructor(protected http: HttpClient, private API_URL, private tokenService: TokenService) {}
   
 
   list() {
-    this.tokenService = new TokenService();
+    //this.tokenService = new TokenService();
     let headers = new HttpHeaders()
-        .append('Authorization', 'Bearer ')
+        .append('Authorization', 'Bearer '+this.tokenService.getToken())
+        console.log('API URL:  ',this.API_URL);
+        if (String(this.API_URL).includes('imoveis')){
+          headers = new HttpHeaders(); // Se for listar imoveis cabeçalho deve ser vazio
+        }
     return this.http.get<T[]>(this.API_URL, { headers })
       .pipe(
         delay(2000),
@@ -21,6 +24,8 @@ export class CrudService<T> {
   }
 
   loadByID(id) {
+    let headers = new HttpHeaders()
+        .append('Authorization', 'Bearer '+this.tokenService.getToken());
     return this.http.get<T>(`${this.API_URL}${id}/`).pipe(take(1));
   }
 
