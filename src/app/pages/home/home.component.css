@@ -1,10 +1,18 @@
 .main-image {
-    height: 500px;
+    height: 350px !important;
     width: 100%;
 }
 
 .img {
     width: 100%;
-    height: 500px;
+    height: 350px !important;
     object-fit: cover;
+}
+.titulo {
+    margin-top: 45px;
+    margin-bottom: 5px;
+}
+
+.titulo h1 {
+    font-size: 2rem;
 }

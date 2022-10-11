@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  TOKEN_URL: 'https://jof.herokuapp.com/token/',
   API: 'https://jof.herokuapp.com/api/',
   BASE_URL: '/api'
 };
