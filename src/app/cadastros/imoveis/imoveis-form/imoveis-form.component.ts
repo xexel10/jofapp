@@ -1,11 +1,19 @@
+
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpEventType, HttpEvent } from '@angular/common/http';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ImovelService } from './../imovel.service';
 import { Subscription, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+
+import { environment } from 'src/environments/environment';
+
+//import { filterResponse, uploadProgress } from '../../shared/rxjs-operators';
 
 import { TipoImovel } from './../../../models/tipo-imovel';
 import { Imovel } from './../../../models/imovel';
@@ -28,13 +36,17 @@ export class ImoveisFormComponent implements OnInit {
   // tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
   tipoImovel!: Observable<TipoImovel[]>;
-  categoria!:Observable<Categoria>;
+  categoria!:Observable<Categoria[]>;
+
+  files!: Set<File>;
+  progress = 0;
 
 
   constructor(
     private fb: FormBuilder,
     private service: ImovelService,
     private tipoImovelService: TipoImovelService,
+    private categoriaService: CategoriaService,
     private modal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute) { }
@@ -48,6 +60,7 @@ export class ImoveisFormComponent implements OnInit {
     );
 
     this.tipoImovel = this.tipoImovelService.list();
+    this.categoria = this.categoriaService.list();
 
    this.form = this.fb.group({
       id: [this.imovel.id],
@@ -128,5 +141,37 @@ export class ImoveisFormComponent implements OnInit {
       }
     });
   }
+
+  onUpload() {
+    if (this.files && this.files.size > 0) {
+     /* this.service.upload(this.files, environment.BASE_URL + '/upload')
+        .pipe(
+          uploadProgress(progress => {
+            console.log(progress);
+            this.progress = progress;
+          }),
+          filterResponse()
+        )
+        .subscribe(response => console.log('Upload Concluído'));*/
+    }
+  }
+
+  onChange(event) {
+    console.log(event);
+
+    const selectedFiles = <FileList>event.srcElement.files;
+    // document.getElementById('customFileLabel').innerHTML = selectedFiles[0].name;
+
+    const fileNames = [];
+    /*this.files = new Set();
+    for (let i = 0; i < selectedFiles.length; i++) {
+      fileNames.push(selectedFiles[i].name);
+      this.files.add(selectedFiles[i]);
+    }
+    document.getElementById('customFileLabel').innerHTML = fileNames.join(', ');*/
+
+    this.progress = 0;
+  }
+
 
 }
