@@ -11,7 +11,7 @@ import { TipoImovel } from 'src/app/models/tipo-imovel';
 export class TipoImovelService extends CrudService<TipoImovel> {
 
   constructor(http: HttpClient) {
-    super(http, `${environment.API}tiposImoveis/`);
+    super(http, `${environment.API}tiposImoveis/`, '');
   }
 
 }

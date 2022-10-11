@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ImovelService extends CrudService<Imovel> {
 
   constructor(http: HttpClient) {
-    super(http, `${environment.API}imoveis/`);
+    super(http, `${environment.API}imoveis/`,'');
   }
 
 }
