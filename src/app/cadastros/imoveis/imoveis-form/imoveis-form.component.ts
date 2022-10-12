@@ -13,13 +13,12 @@ import { take } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-//import { filterResponse, uploadProgress } from '../../shared/rxjs-operators';
-
 import { TipoImovel } from './../../../models/tipo-imovel';
 import { Imovel } from './../../../models/imovel';
 import { TipoImovelService } from './../../tipo-imovel/tipo-imovel.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from './../../categorias/categoria.service';
+import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -36,7 +35,7 @@ export class ImoveisFormComponent implements OnInit {
   // tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
   tipoImovel!: Observable<TipoImovel[]>;
-  categoria!:Observable<Categoria[]>;
+  categoria!: Observable<Categoria[]>;
 
   files!: Set<File>;
   progress = 0;
@@ -62,7 +61,7 @@ export class ImoveisFormComponent implements OnInit {
     this.tipoImovel = this.tipoImovelService.list();
     this.categoria = this.categoriaService.list();
 
-   this.form = this.fb.group({
+    this.form = this.fb.group({
       id: [this.imovel.id],
       nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
       descricao: [this.imovel.nome],
@@ -95,7 +94,7 @@ export class ImoveisFormComponent implements OnInit {
         }
       });
 
-    }else{
+    } else {
       this.verificaValidacoesForm(this.form);
     }
   }
@@ -116,12 +115,12 @@ export class ImoveisFormComponent implements OnInit {
   }
 
   verificaValidTouched(campo) {
-    return  !this.form.controls[campo].valid && (this.form.controls[campo].touched || this.form.controls[campo].dirty)
+    return !this.form.controls[campo].valid && (this.form.controls[campo].touched || this.form.controls[campo].dirty)
   }
 
   verificaRequired(campo) {
     return this.form.controls[campo].hasError('required') && (this.form.controls[campo].touched || this.form.controls[campo].dirty)
-   }
+  }
 
   aplicaCssErro(campo: string) {
     return {
@@ -144,31 +143,34 @@ export class ImoveisFormComponent implements OnInit {
 
   onUpload() {
     if (this.files && this.files.size > 0) {
-     /* this.service.upload(this.files, environment.BASE_URL + '/upload')
-        .pipe(
-          uploadProgress(progress => {
-            console.log(progress);
-            this.progress = progress;
-          }),
-          filterResponse()
-        )
-        .subscribe(response => console.log('Upload Concluído'));*/
+      this.service.upload(this.files, environment.BASE_URL + '/upload')
+        .subscribe((event: HttpEvent<Object>) => {
+          // console.log(event);
+          if (event.type === HttpEventType.Response) {
+            console.log('Upload Concluído');
+          } else if (event.type === HttpEventType.UploadProgress) {
+            const percentDone = Math.round((event.loaded * 100) / event.total!);
+            // console.log('Progresso', percentDone);
+            this.progress = percentDone;
+          }
+        });
     }
   }
+
 
   onChange(event) {
     console.log(event);
 
     const selectedFiles = <FileList>event.srcElement.files;
-    // document.getElementById('customFileLabel').innerHTML = selectedFiles[0].name;
+    document.getElementById('customFileLabel')!.innerHTML = selectedFiles[0].name;
 
-    const fileNames = [];
-    /*this.files = new Set();
+    const fileNames: any = [];
+    this.files = new Set();
     for (let i = 0; i < selectedFiles.length; i++) {
       fileNames.push(selectedFiles[i].name);
       this.files.add(selectedFiles[i]);
     }
-    document.getElementById('customFileLabel').innerHTML = fileNames.join(', ');*/
+    document.getElementById('customFileLabel')!.innerHTML = fileNames.join(', ');
 
     this.progress = 0;
   }
