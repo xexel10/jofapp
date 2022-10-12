@@ -1,105 +1,54 @@
-<form
-  class="row g-3 needs-validation"
-  novalidate
-  [formGroup]="form"
-  style="padding-top: 10px"
->
+<form class="row g-3 needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
   <div class="row align-items-start">
     <div class="col-sm-4">
       <label for="nome" class="form-label">Imóvel</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nome"
-        placeholder="Imóvel"
-        formControlName="nome"
-      />
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('nome')"
-        msgErro="Imóvel é Obrigatório"
-      >
+      <input type="text" class="form-control" id="nome" placeholder="Imóvel" formControlName="nome" />
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Imóvel é Obrigatório">
       </app-campo-control-erro>
     </div>
 
     <div class="col-sm-4">
       <label for="tipoImovel" class="form-label">Tipo Imóvel</label>
-      <select
-        type="text"
-        class="form-control"
-        id="tipoImovel"
-        placeholder="Tipo Imóvel"
-        formControlName="tipoImovel"
-      >
+      <select type="text" class="form-control" id="tipoImovel" placeholder="Tipo Imóvel" formControlName="tipoImovel">
         <option *ngFor="let tp of tipoImovel | async" [value]="tp.id">
           {{ tp.nome }}
         </option>
       </select>
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('tipoImovel')"
-        msgErro="Nome é Obrigatório"
-      >
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoImovel')" msgErro="Nome é Obrigatório">
       </app-campo-control-erro>
     </div>
 
     <div class="col-sm-4">
       <label for="categoria" class="form-label">Categoria</label>
-      <select
-        type="text"
-        class="form-control"
-        id="categoria"
-        placeholder="Categoria"
-        formControlName="categoria"
-      >
+      <select type="text" class="form-control" id="categoria" placeholder="Categoria" formControlName="categoria">
         <option *ngFor="let cat of categoria | async" [value]="cat.id">
           {{ cat.nome }}
         </option>
       </select>
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('categoria')"
-        msgErro="Categoria é Obrigatório"
-      >
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('categoria')" msgErro="Categoria é Obrigatório">
       </app-campo-control-erro>
     </div>
   </div>
   <div class="col-sm-12">
     <label for="descricao" class="form-label">Descrição</label>
-    <textarea
-      type="text"
-      class="form-control"
-      id="descricao"
-      placeholder="Descrição"
-      formControlName="descricao"
-      style="height: 200px"
-    ></textarea>
-    <app-campo-control-erro
-      [mostrarErro]="verificaValidTouched('nome')"
-      msgErro="Descrição é Obrigatório"
-    >
+    <textarea type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"
+      style="height: 200px"></textarea>
+    <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Descrição é Obrigatório">
     </app-campo-control-erro>
   </div>
 
-  <!---->
+  <!--Upload-->
 
   <div style="margin-top: 10px">
     <div class="custom-file">
-      <input
-        type="file"
-        class="custom-file-input"
-        id="customFile"
-
-        multiple
-      />
-
+      <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)" multiple />
+      <label class="custom-file-label" for="customFile" id="customFileLabel">Selecionar Arquivo</label>
     </div>
 
-  <br>
+    <br>
 
     <div class="progress">
-      <div
-        class="progress-bar"
-        role="progressbar"
-        [style.width]="progress + '%'"
-      >
+      <div class="progress-bar" role="progressbar" [style.width]="progress + '%'">
         {{ progress }}%
       </div>
     </div>
@@ -117,7 +66,11 @@
 -->
 
   <!---->
-
+  <div style="margin-top: 10px">
+    <button type="button" class="btn btn-primary" (click)="onUpload()" [disabled]="!files">
+      Upload
+    </button>
+  </div>
   <div class="row align-items-start">
     <div class="col-12" style="margin-top: 10px">
       <button class="btn btn-primary" type="submit" (click)="onSubmit()">
