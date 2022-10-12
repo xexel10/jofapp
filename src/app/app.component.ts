@@ -41,9 +41,6 @@ export class AppComponent {
   }
 
     isLogged(){
-<<<<<<< HEAD
-=======
->>>>>>> 604cd5000b69a45d625e5ed02830247df5f7d8c0
         return this.tokenService.hasToken();
     }
 
