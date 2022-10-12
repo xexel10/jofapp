@@ -13,7 +13,7 @@ export class CrudService<T> {
     let headers = new HttpHeaders()
         .append('Authorization', 'Bearer '+this.tokenService.getToken())
         console.log('API URL:  ',this.API_URL);
-        if (String(this.API_URL).includes('imoveis')){
+        if (String(this.API_URL).includes('imoveis') && !String(this.API_URL).includes('tipo-imovel')){
           headers = new HttpHeaders(); // Se for listar imoveis cabeçalho deve ser vazio
         }
     return this.http.get<T[]>(this.API_URL, { headers })
