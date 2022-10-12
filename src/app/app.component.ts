@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
     isLogged(){
-      console.log('Retorno: ',this.tokenService.hasToken());
+      //console.log('Retorno: ',this.tokenService.hasToken());
         return this.tokenService.hasToken();
     }
 
