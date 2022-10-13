@@ -16,15 +16,12 @@ export class ImovelService extends CrudService<Imovel> {
     super(http, `${environment.API}imoveis/`,tokenService);
   }
 
-  upload(files: Set<File>, url: string) {
+  upload(files: Set<File>) {
 
     const formData = new FormData();
     files.forEach(file => formData.append('file', file, file.name));
 
-    // const request = new HttpRequest('POST', url, formData);
-    // return this.http.request(request);
-
-    return this.http.post(url, formData, {
+    return this.http.post(`${environment.API}fotosImovel/`, formData, {
       observe: 'events',
       reportProgress: true
     });

@@ -143,7 +143,7 @@ export class ImoveisFormComponent implements OnInit {
 
   onUpload() {
     if (this.files && this.files.size > 0) {
-      this.service.upload(this.files, environment.BASE_URL + '/upload')
+      this.service.upload(this.files)
         .subscribe((event: HttpEvent<Object>) => {
           // console.log(event);
           if (event.type === HttpEventType.Response) {
