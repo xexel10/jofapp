@@ -6,15 +6,20 @@ import { TokenService } from '../auth/token/token.service';
 export class CrudService<T> {
   //tokenService! : TokenService;
   constructor(protected http: HttpClient, private API_URL, private tokenService: TokenService) {}
-  
+
 
   list() {
     //this.tokenService = new TokenService();
-    let headers = new HttpHeaders()
-        .append('Authorization', 'Bearer '+this.tokenService.getToken())
-        console.log('API URL:  ',this.API_URL);
+    let headers = new HttpHeaders();
+
         if (String(this.API_URL).includes('imoveis') && !String(this.API_URL).includes('tipo-imovel')){
+          console.log('Imoveis, logo não passará header')
           headers = new HttpHeaders(); // Se for listar imoveis cabeçalho deve ser vazio
+        }
+        else {
+          console.log('Não é imoveis, logo vai passar header')
+          headers = headers = new HttpHeaders().append('Authorization', 'Bearer '+this.tokenService.getToken())
+         console.log('API URL:  ',this.API_URL);
         }
     return this.http.get<T[]>(this.API_URL, { headers })
       .pipe(
