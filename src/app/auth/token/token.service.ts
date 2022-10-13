@@ -31,8 +31,8 @@ export class TokenService {
   }
 
   getToken() {
-    console.log("GET TOKEN: ");
-    console.log(window.localStorage.getItem(KEY))
+   // console.log("GET TOKEN: ");
+    //console.log(window.localStorage.getItem(KEY))
     if (window.localStorage.getItem(KEY) != null)
         this.verificaTokenExpirado();
 
@@ -46,7 +46,7 @@ export class TokenService {
   }
 
   verificaTokenExpirado() {
-      console.log("verifica token expirado")
+      //console.log("verifica token expirado")
       this.horaToken = window.localStorage.getItem('HORA');
       this.horaAtual = new Date().getTime();
       if (this.horaAtual > Number(this.horaToken) + 60000) {

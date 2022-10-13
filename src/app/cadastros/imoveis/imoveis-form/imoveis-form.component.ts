@@ -1,3 +1,4 @@
+import { Foto } from './../../../models/foto';
 
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -66,7 +67,8 @@ export class ImoveisFormComponent implements OnInit {
       nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
       descricao: [this.imovel.nome],
       tipoImovel: [this.imovel.nome],
-      categoria: [this.imovel.nome]
+      categoria: [this.imovel.nome],
+      foto: [this.imovel.fotos]
 
     });
 
@@ -141,9 +143,33 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
+  // onUpload() {
+  //   if (this.files && this.files.size > 0) {
+  //     this.service.upload(this.files)
+  //       .subscribe((event: HttpEvent<Object>) => {
+  //         // console.log(event);
+  //         if (event.type === HttpEventType.Response) {
+  //           console.log('Upload Concluído');
+  //         } else if (event.type === HttpEventType.UploadProgress) {
+  //           const percentDone = Math.round((event.loaded * 100) / event.total!);
+  //           // console.log('Progresso', percentDone);
+  //           this.progress = percentDone;
+  //         }
+  //       });
+  //   }
+  // }
+
+
+
   onUpload() {
+
+      const formData = new FormData();
+      this.files.forEach(file => formData.append('file', file, file.name));
+    
+     const foto = {id: 0, imovel: 6, descricao: 'teste', foto: this.files} as Foto;
+
     if (this.files && this.files.size > 0) {
-      this.service.upload(this.files)
+      this.service.upload( foto)
         .subscribe((event: HttpEvent<Object>) => {
           // console.log(event);
           if (event.type === HttpEventType.Response) {
