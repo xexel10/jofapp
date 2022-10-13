@@ -1,3 +1,4 @@
+import { Categoria } from 'src/app/models/categoria';
 import { Foto } from './foto';
 
 export interface Imovel {
@@ -5,7 +6,7 @@ export interface Imovel {
     nome: string;
     descricao: string;
     fotos: Foto[];
-    categoria: number;
+    categoria: Categoria;
     tipoImovel: number;
 
 }
