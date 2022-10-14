@@ -65,10 +65,13 @@ export class ImoveisFormComponent implements OnInit {
     this.form = this.fb.group({
       id: [this.imovel.id],
       nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
-      descricao: [this.imovel.nome],
-      tipoImovel: [this.imovel.nome],
-      categoria: [this.imovel.nome],
-      foto: [this.imovel.fotos]
+      descricao: [this.imovel.descricao],
+      tipoImovel: [this.imovel.tipoImovel],
+      categoria: [this.imovel.categoria],
+      foto: this.fb.group({
+        foto: [this.imovel.fotos]
+      })
+
 
     });
 
@@ -91,6 +94,7 @@ export class ImoveisFormComponent implements OnInit {
         next: (v) => console.log(v),
         error: (e) => this.modal.showAlertDanger(msgError),
         complete: () => {
+          //this.onUpload();
           this.modal.showAlertSuccess(msgSuccess);
           this.location.back();
         }
@@ -143,33 +147,9 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
-  // onUpload() {
-  //   if (this.files && this.files.size > 0) {
-  //     this.service.upload(this.files)
-  //       .subscribe((event: HttpEvent<Object>) => {
-  //         // console.log(event);
-  //         if (event.type === HttpEventType.Response) {
-  //           console.log('Upload Concluído');
-  //         } else if (event.type === HttpEventType.UploadProgress) {
-  //           const percentDone = Math.round((event.loaded * 100) / event.total!);
-  //           // console.log('Progresso', percentDone);
-  //           this.progress = percentDone;
-  //         }
-  //       });
-  //   }
-  // }
-
-
-
   onUpload() {
-
-      const formData = new FormData();
-      this.files.forEach(file => formData.append('file', file, file.name));
-    
-     const foto = {id: 0, imovel: 6, descricao: 'teste', foto: this.files} as Foto;
-
     if (this.files && this.files.size > 0) {
-      this.service.upload( foto)
+      this.service.upload(this.files, this.form.value)
         .subscribe((event: HttpEvent<Object>) => {
           // console.log(event);
           if (event.type === HttpEventType.Response) {
@@ -182,7 +162,6 @@ export class ImoveisFormComponent implements OnInit {
         });
     }
   }
-
 
   onChange(event) {
     console.log(event);
