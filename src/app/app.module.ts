@@ -19,6 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-sidebar.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
+import { FontAwesomeModule  } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { ImovelModule } from './cadastros/imoveis/imovel.module';
     AuthModule,
     CategoriaModule,
     SharedModule,
-    ImovelModule
+    ImovelModule,
+    FontAwesomeModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

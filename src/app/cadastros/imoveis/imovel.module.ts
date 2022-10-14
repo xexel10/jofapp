@@ -1,6 +1,3 @@
-import { ImovelService } from './imovel.service';
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ImovelRoutingModule } from './imovel.routing.module';
 import { ImoveisListaComponent } from './imoveis-lista/imoveis-lista.component';
 import { ImoveisFormComponent } from './imoveis-form/imoveis-form.component';
+import { ImovelService } from './imovel.service';
 
 
 @NgModule({

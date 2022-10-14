@@ -1,5 +1,3 @@
-import { Foto } from './../../../models/foto';
-
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -7,19 +5,14 @@ import { Location } from '@angular/common';
 import { HttpEventType, HttpEvent } from '@angular/common/http';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { ImovelService } from './../imovel.service';
 import { Subscription, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-
-
-import { environment } from 'src/environments/environment';
 
 import { TipoImovel } from './../../../models/tipo-imovel';
-import { Imovel } from './../../../models/imovel';
 import { TipoImovelService } from './../../tipo-imovel/tipo-imovel.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from './../../categorias/categoria.service';
-import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
+import { ImovelService } from './../imovel.service';
+import { Imovel } from './../../../models/imovel';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -32,14 +25,16 @@ export class ImoveisFormComponent implements OnInit {
   submitted = false;
   basePath = '/admin/imovel';
 
-  imovel!: Imovel;
-  // tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
+  imovel!: Imovel;
   tipoImovel!: Observable<TipoImovel[]>;
   categoria!: Observable<Categoria[]>;
 
   files!: Set<File>;
   progress = 0;
+
+  deletedArray: number[] = [];
+
 
 
   constructor(
@@ -178,6 +173,17 @@ export class ImoveisFormComponent implements OnInit {
     document.getElementById('customFileLabel')!.innerHTML = fileNames.join(', ');
 
     this.progress = 0;
+  }
+
+  onDelete(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var value = idAttr.nodeValue;
+
+    console.log(value)
+    this.deletedArray.push(value);
+    console.log(this.deletedArray);
+    console.log(this.deletedArray[0]);
   }
 
 
