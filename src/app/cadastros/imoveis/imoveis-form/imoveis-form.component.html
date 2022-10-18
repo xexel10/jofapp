@@ -39,11 +39,18 @@
 
   <!--Upload-->
   <div style="margin-top: 10px" class="col-sm-6">
-    <div class="custom-file">
-      <input type="file" value="Selecionar" #selectFile class="custom-file-input" id="customFile"
-        (change)="onFileSelected($event)" multiple />
-      <label class="custom-file-label" for="customFile" id="customFileLabel">Selecionar Arquivo</label>
+    <div class="dropzone">
+        <div class="text-wrapper">
+          <div class="centered">
+            Drag and drop your file or 
+            <a (click)="selectFile.click()" class="browse-button">Browse</a>
+            browser a file
+          </div>
+          
+        </div>
     </div>
+      <input type="file" style="display: none;" value="Selecionar" #selectFile class="custom-file-input" id="customFile"
+        (change)="onFileSelected($event)" multiple />
 
     <br />
     <div class="mt-5">
