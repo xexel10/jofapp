@@ -1,145 +1,62 @@
-<form
-  class="row g-3 needs-validation"
-  novalidate
-  [formGroup]="form"
-  style="padding-top: 10px"
->
+<form class="row g-3 needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
   <div class="row align-items-start">
     <div class="col-sm-4">
       <label for="nome" class="form-label">Imóvel</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nome"
-        placeholder="Imóvel"
-        formControlName="nome"
-      />
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('nome')"
-        msgErro="Imóvel é Obrigatório"
-      >
+      <input type="text" class="form-control" id="nome" placeholder="Imóvel" formControlName="nome" />
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Imóvel é Obrigatório">
       </app-campo-control-erro>
     </div>
 
     <div class="col-sm-4">
       <label for="tipoImovel" class="form-label">Tipo Imóvel</label>
-      <select
-        type="text"
-        class="form-control"
-        id="tipoImovel"
-        placeholder="Tipo Imóvel"
-        formControlName="tipoImovel"
-      >
+      <select type="text" class="form-control" id="tipoImovel" placeholder="Tipo Imóvel" formControlName="tipoImovel">
         <option *ngFor="let tp of tipoImovel | async" [value]="tp.id">
           {{ tp.nome }}
         </option>
       </select>
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('tipoImovel')"
-        msgErro="Nome é Obrigatório"
-      >
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoImovel')" msgErro="Nome é Obrigatório">
       </app-campo-control-erro>
     </div>
 
     <div class="col-sm-4">
       <label for="categoria" class="form-label">Categoria</label>
-      <select
-        type="text"
-        class="form-control"
-        id="categoria"
-        placeholder="Categoria"
-        formControlName="categoria"
-      >
+      <select type="text" class="form-control" id="categoria" placeholder="Categoria" formControlName="categoria">
         <option *ngFor="let cat of categoria | async" [value]="cat.id">
           {{ cat.nome }}
         </option>
       </select>
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched('categoria')"
-        msgErro="Categoria é Obrigatório"
-      >
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('categoria')" msgErro="Categoria é Obrigatório">
       </app-campo-control-erro>
     </div>
   </div>
   <div class="col-sm-12">
     <label for="descricao" class="form-label">Descrição</label>
-    <textarea
-      type="text"
-      class="form-control"
-      id="descricao"
-      placeholder="Descrição"
-      formControlName="descricao"
-      style="height: 200px"
-    ></textarea>
-    <app-campo-control-erro
-      [mostrarErro]="verificaValidTouched('nome')"
-      msgErro="Descrição é Obrigatório"
-    >
+    <textarea type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"
+      style="height: 200px"></textarea>
+    <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Descrição é Obrigatório">
     </app-campo-control-erro>
   </div>
 
   <!--Upload-->
-  <div>
-    <table
-      class="table align-middle mb-0 bg-white"
-      *ngIf="imovel as imovel; else loading"
-    >
-      <thead class="bg-light">
-        <tr>
-          <th>ID</th>
-          <th>Excluir</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let imovel of imovel.fotos">
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                src="{{ imovel.foto }}"
-                alt=""
-                style="width: 45px; height: 45px"
-                class="rounded-circle"
-              />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">{{ imovel.descricao }}</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <i  id="{{ imovel.id }}" class="bi bi-x-lg"  (click)="changeTableRowColor($event)"></i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #loading>
-      <span>Carregando imóveis...</span>
-    </ng-template>
-  </div>
-
-  <div style="margin-top: 10px">
+  <div style="margin-top: 10px" class="col-sm-6">
     <div class="custom-file">
-      <input
-        type="file"
-        class="custom-file-input"
-        id="customFile"
-        (change)="onChange($event)"
-        multiple
-      />
-      <label class="custom-file-label" for="customFile" id="customFileLabel"
-        >Selecionar Arquivo</label
-      >
+      <input type="file" value="Selecionar" #selectFile class="custom-file-input" id="customFile"
+        (change)="onFileSelected($event)" multiple />
+      <label class="custom-file-label" for="customFile" id="customFileLabel">Selecionar Arquivo</label>
     </div>
 
     <br />
+    <div class="mt-5">
+      <div class="row">
+        <mat-grid-list cols="4" rowHeight="1:1">
+          <mat-grid-tile *ngFor="let item of images; let i = index;">
+            <div style="position: relative">
+              <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+              <img class="itemImage" [src]="item.url" width="200px" height="200px" />
+            </div>
 
-    <div class="progress">
-      <div
-        class="progress-bar"
-        role="progressbar"
-        [style.width]="progress + '%'"
-      >
-        {{ progress }}%
+          </mat-grid-tile>
+        </mat-grid-list>
       </div>
     </div>
   </div>

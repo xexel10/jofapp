@@ -1,3 +1,5 @@
+import { FileHandle } from './../../../models/file-handle';
+import { Foto } from './../../../models/foto';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +15,8 @@ import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { ImovelService } from './../imovel.service';
 import { Imovel } from './../../../models/imovel';
+import { DomSanitizer } from '@angular/platform-browser';
+import { faTowerObservation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -32,11 +36,7 @@ export class ImoveisFormComponent implements OnInit {
 
   files!: Set<File>;
   progress = 0;
-
-  deletedArray: number[] = [];
-  rowClicked: number = 0;
-
-
+  images: FileHandle[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -45,7 +45,8 @@ export class ImoveisFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private modal: AlertModalService,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -54,9 +55,6 @@ export class ImoveisFormComponent implements OnInit {
         this.imovel = data['imovel'];
       }
     );
-
-    this.tipoImovel = this.tipoImovelService.list();
-    this.categoria = this.categoriaService.list();
 
     this.form = this.fb.group({
       id: [this.imovel.id],
@@ -71,6 +69,8 @@ export class ImoveisFormComponent implements OnInit {
 
     });
 
+    this.tipoImovel = this.tipoImovelService.list();
+    this.categoria = this.categoriaService.list();
   }
 
   onSubmit() {
@@ -87,10 +87,12 @@ export class ImoveisFormComponent implements OnInit {
       }
 
       this.service.save(this.form.value).subscribe({
-        next: (v) => console.log(v),
+        next: (v) => {
+          console.log(v);
+          this.onUpload(v);
+        },
         error: (e) => this.modal.showAlertDanger(msgError),
         complete: () => {
-          //this.onUpload();
           this.modal.showAlertSuccess(msgSuccess);
           this.location.back();
         }
@@ -98,6 +100,24 @@ export class ImoveisFormComponent implements OnInit {
 
     } else {
       this.verificaValidacoesForm(this.form);
+    }
+  }
+
+  onUpload(v) {
+
+    if (this.files && this.files.size > 0) {
+
+      this.service.upload(this.files, v)
+        .subscribe((event: HttpEvent<Object>) => {
+          // console.log(event);
+          if (event.type === HttpEventType.Response) {
+            console.log('Upload Concluído');
+          } else if (event.type === HttpEventType.UploadProgress) {
+            const percentDone = Math.round((event.loaded * 100) / event.total!);
+            // console.log('Progresso', percentDone);
+            this.progress = percentDone;
+          }
+        });
     }
   }
 
@@ -143,22 +163,6 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
-  onUpload() {
-    if (this.files && this.files.size > 0) {
-      this.service.upload(this.files, this.form.value)
-        .subscribe((event: HttpEvent<Object>) => {
-          // console.log(event);
-          if (event.type === HttpEventType.Response) {
-            console.log('Upload Concluído');
-          } else if (event.type === HttpEventType.UploadProgress) {
-            const percentDone = Math.round((event.loaded * 100) / event.total!);
-            // console.log('Progresso', percentDone);
-            this.progress = percentDone;
-          }
-        });
-    }
-  }
-
   onChange(event) {
     console.log(event);
 
@@ -176,26 +180,55 @@ export class ImoveisFormComponent implements OnInit {
     this.progress = 0;
   }
 
-  onDelete(event) {
-    var target = event.target || event.srcElement || event.currentTarget;
-    var idAttr = target.attributes.id;
-    var value = idAttr.nodeValue;
+  onFileSelected(event: any) {
 
-    console.log(value)
-    this.deletedArray.push(value);
-    console.log(this.deletedArray);
-    console.log(this.deletedArray[0]);
-  }
+    if (event.target.files) {
 
-  changeTableRowColor(idx: any) { 
-    if ( this.rowClicked == 0){
-      this.rowClicked = 1
-    }else
-    {
-      this.rowClicked = 0
+      const file = event.target.files[0];
+      const fileHandle: FileHandle = {
+        file: file,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+      };
+      this.images.push(fileHandle);
     }
-    
   }
 
+  prepareFormData(foto: Foto): FormData {
+    const formData = new FormData();
+    formData.append('foto',
+      new Blob([JSON.stringify(foto)], { type: 'application/json' })
+    );
+
+    for (let i = 0; i < this.imovel.ImovelImages.length; i++) {
+      formData.append('foto', this.imovel.ImovelImages[i].file, this.imovel.ImovelImages[i].file.name)
+    }
+    return formData;
+
+  }
+
+  onDelete(foto) {
+    //var target = event.target || event.srcElement || event.currentTarget;
+    //var idAttr = target.attributes.id;
+    //var value = idAttr.nodeValue;
+
+    this.form.value.foto.foto.forEach((value, index) => {
+      if (value == foto) {
+        this.form.value.foto.foto.splice(index, 1);
+      }
+    });
+  }
+
+  onAddRow(): void {
+    this.form.value.foto.foto(this.form.value)
+  }
+
+  removeImages(i: number){
+    this.images.splice(i, 1)
+  }
+
+  // changeTableRowColor(idx: any) {
+  //   if (this.rowClicked === idx) this.rowClicked = -1;
+  //   else this.rowClicked = idx;
+  // }
 
 }

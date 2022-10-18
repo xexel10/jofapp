@@ -17,18 +17,19 @@ export class ImovelService extends CrudService<Imovel> {
     super(http, `${environment.API}imoveis/`, tokenService);
   }
 
-   upload(files: Set<File>, imovel: Imovel) {
+  upload(files: Set<File>, imovel) {
 
     const formData = new FormData();
-     files.forEach(file => formData.append('foto', file, file.name));
-     formData.append('imovel', imovel.descricao,'1');
-     formData.append('descricao', 'teste')
+    files.forEach(file => formData.append('foto', file, file.name));
+    formData.append('imovel', imovel.id);
+    formData.append('descricao', imovel.nome)
 
-     return this.http.post(`${environment.API}fotosImovel/`, formData, {
-       observe: 'events',
-       reportProgress: true
-     });
-   }  
+    return this.http.post(`${environment.API}fotosImovel/`, formData, {
+      observe: 'events',
+      reportProgress: true
+    });
+    
+  }
 
 
 

@@ -20,6 +20,7 @@ import { HomeAdminSidebarComponent } from './home/home-admin-sidebar/home-admin-
 import { AdminComponent } from './pages/admin/admin.component';
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 import { FontAwesomeModule  } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -43,7 +44,8 @@ import { FontAwesomeModule  } from '@fortawesome/angular-fontawesome';
     CategoriaModule,
     SharedModule,
     ImovelModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

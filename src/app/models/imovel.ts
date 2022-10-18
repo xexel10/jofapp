@@ -1,3 +1,4 @@
+import { FileHandle } from './file-handle';
 import { Categoria } from 'src/app/models/categoria';
 import { Foto } from './foto';
 
@@ -8,5 +9,6 @@ export interface Imovel {
     fotos: Foto[];
     categoria: Categoria;
     tipoImovel: number;
+    ImovelImages: FileHandle[];
 
 }
