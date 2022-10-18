@@ -9,6 +9,4 @@ export interface Imovel {
     fotos: Foto[];
     categoria: Categoria;
     tipoImovel: number;
-    ImovelImages: FileHandle[];
-
 }

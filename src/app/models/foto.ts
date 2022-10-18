@@ -2,5 +2,6 @@ export interface Foto {
 id: number;
 imovel: number;
 descricao: string;
-foto: FormData;
+foto: string;
+
 }
