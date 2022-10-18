@@ -67,9 +67,20 @@ export class ImoveisFormComponent implements OnInit {
       })
     });
 
+    // Carrega dropdownlist de tipoImovel e categoria
     this.tipoImovel = this.tipoImovelService.list();
     this.categoria = this.categoriaService.list();
 
+    //Na Atualização pegas as images da API e coloca no array
+    if (this.form.value.id) {
+      this.form.value.foto.foto.forEach(e => {
+        const fileHandle: FileHandle = {
+          file: e.file,
+          url: e.foto
+        };
+        this.ImovelImages.push(fileHandle);
+      });
+    }
   }
 
   onSubmit() {
@@ -87,8 +98,7 @@ export class ImoveisFormComponent implements OnInit {
 
       this.service.save(this.form.value).subscribe({
         next: (v) => {
-          console.log(v);
-          this.onUpload2(v);
+          this.onUpload(v);
         },
         error: (e) => this.modal.showAlertDanger(msgError),
         complete: () => {
@@ -102,21 +112,21 @@ export class ImoveisFormComponent implements OnInit {
     }
   }
 
-  onUpload2(v){
+  onUpload(v) {
 
-   this.ImovelImages.forEach(images =>{
-   this.service.saveImages(images.file, v)
-   .subscribe((event: HttpEvent<Object>) => {
-     // console.log(event);
-     if (event.type === HttpEventType.Response) {
-       console.log('Upload Concluído');
-     } else if (event.type === HttpEventType.UploadProgress) {
-       const percentDone = Math.round((event.loaded * 100) / event.total!);
-       // console.log('Progresso', percentDone);
-       this.progress = percentDone;
-     }
-   });
-  });
+    this.ImovelImages.forEach(images => {
+      this.service.saveImages(images.file, v)
+        .subscribe((event: HttpEvent<Object>) => {
+          // console.log(event);
+          if (event.type === HttpEventType.Response) {
+            console.log('Upload Concluído');
+          } else if (event.type === HttpEventType.UploadProgress) {
+            const percentDone = Math.round((event.loaded * 100) / event.total!);
+            // console.log('Progresso', percentDone);
+            this.progress = percentDone;
+          }
+        });
+    });
 
   }
 
@@ -239,7 +249,7 @@ export class ImoveisFormComponent implements OnInit {
     this.form.value.foto.foto(this.form.value)
   }
 
-  removeImages(i: number){
+  removeImages(i: number) {
     this.ImovelImages.splice(i, 1)
   }
 
