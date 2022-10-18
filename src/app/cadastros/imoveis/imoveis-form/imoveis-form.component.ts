@@ -34,6 +34,7 @@ export class ImoveisFormComponent implements OnInit {
   progress = 0;
 
   deletedArray: number[] = [];
+  rowClicked: number = 0;
 
 
 
@@ -184,6 +185,16 @@ export class ImoveisFormComponent implements OnInit {
     this.deletedArray.push(value);
     console.log(this.deletedArray);
     console.log(this.deletedArray[0]);
+  }
+
+  changeTableRowColor(idx: any) { 
+    if ( this.rowClicked == 0){
+      this.rowClicked = 1
+    }else
+    {
+      this.rowClicked = 0
+    }
+    
   }
 
 
