@@ -36,7 +36,7 @@ export class ImoveisFormComponent implements OnInit {
 
   files!: Set<File>;
   progress = 0;
-  ImovelImages: FileHandle[] = [];
+  //ImovelImages: FileHandle[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -62,25 +62,24 @@ export class ImoveisFormComponent implements OnInit {
       descricao: [this.imovel.descricao],
       tipoImovel: [this.imovel.tipoImovel],
       categoria: [this.imovel.categoria],
-      foto: this.fb.group({
-        foto: [this.imovel.fotos]
-      })
+      fotos: [this.imovel.fotos]
+     
     });
 
     // Carrega dropdownlist de tipoImovel e categoria
     this.tipoImovel = this.tipoImovelService.list();
     this.categoria = this.categoriaService.list();
 
-    //Na Atualização pegas as images da API e coloca no array
-    if (this.form.value.id) {
-      this.form.value.foto.foto.forEach(e => {
-        const fileHandle: FileHandle = {
-          file: e.file,
-          url: e.foto
-        };
-        this.ImovelImages.push(fileHandle);
-      });
-    }
+    // //Na Atualização pegas as images da API e coloca no array
+    // if (this.form.value.id) {
+    //   this.form.value.fotos.forEach(e => {
+    //     const fileHandle: FileHandle = {
+    //       file: e.file,
+    //       url: e.foto
+    //     };
+    //     this.this.form.value.fotos.push(fileHandle);
+    //   });
+    // }
   }
 
   onSubmit() {
@@ -114,7 +113,7 @@ export class ImoveisFormComponent implements OnInit {
 
   onUpload(v) {
 
-    this.ImovelImages.forEach(images => {
+    this.form.value.fotos.forEach(images => {
       this.service.saveImages(images.file!, v)
         .subscribe((event: HttpEvent<Object>) => {
           // console.log(event);
@@ -176,38 +175,23 @@ export class ImoveisFormComponent implements OnInit {
 
     if (event.target.files) {
 
-      const file = event.target.files[0];
+      const foto = event.target.files[0];
       const fileHandle: FileHandle = {
-        file: file,
-        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+        foto: foto,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(foto))
       };
-      this.ImovelImages.push(fileHandle);
+      this.form.value.fotos.push(fileHandle);
     }
   }
 
-  onDelete(foto) {
-    //var target = event.target || event.srcElement || event.currentTarget;
-    //var idAttr = target.attributes.id;
-    //var value = idAttr.nodeValue;
-
-    this.form.value.foto.foto.forEach((value, index) => {
-      if (value == foto) {
-        this.form.value.foto.foto.splice(index, 1);
-      }
-    });
-  }
-
   removeImages(i: number) {
-    this.ImovelImages.splice(i, 1);
-  }
+    this.form.value.fotos[i].status = 'd';
 
-  // changeTableRowColor(idx: any) {
-  //   if (this.rowClicked === idx) this.rowClicked = -1;
-  //   else this.rowClicked = idx;
-  // }
+    //this.form.value.fotos.splice(i, 1);
+  }
 
   fileDropped(evt){
-    this.ImovelImages.push(evt);
+    this.form.value.fotos.push(evt);
   }
 
 }
