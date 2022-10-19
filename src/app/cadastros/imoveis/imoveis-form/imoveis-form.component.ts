@@ -38,6 +38,24 @@ export class ImoveisFormComponent implements OnInit {
   progress = 0;
   ImovelImages: FileHandle[] = [];
 
+  getUrlExtension = (url) => {
+    return url
+      .split(/[#?]/)[0]
+      .split(".")
+      .pop()
+      .trim();
+  }
+
+  onImageEdit = async (imgUrl) => {
+    var imgExt = this.getUrlExtension(imgUrl);
+
+    const response = await fetch(imgUrl);
+    const blob = await response.blob();
+    const file = new File([blob], "profileImage." + imgExt, {
+      type: blob.type,
+    });
+  }
+
   constructor(
     private fb: FormBuilder,
     private service: ImovelService,
@@ -75,7 +93,7 @@ export class ImoveisFormComponent implements OnInit {
     if (this.form.value.id) {
       this.form.value.foto.foto.forEach(e => {
         const fileHandle: FileHandle = {
-          file: e.file,
+          file: this.onImageEdit(e.file),
           url: e.foto
         };
         this.ImovelImages.push(fileHandle);
@@ -115,7 +133,7 @@ export class ImoveisFormComponent implements OnInit {
   onUpload(v) {
 
     this.ImovelImages.forEach(images => {
-      this.service.saveImages(images.file, v)
+      this.service.saveImages(images.file!, v)
         .subscribe((event: HttpEvent<Object>) => {
           // console.log(event);
           if (event.type === HttpEventType.Response) {
@@ -129,24 +147,6 @@ export class ImoveisFormComponent implements OnInit {
     });
 
   }
-
-  // onUpload(v) {
-
-  //   if (this.files && this.files.size > 0) {
-
-  //     this.service.upload(this.files, v)
-  //       .subscribe((event: HttpEvent<Object>) => {
-  //         // console.log(event);
-  //         if (event.type === HttpEventType.Response) {
-  //           console.log('Upload Concluído');
-  //         } else if (event.type === HttpEventType.UploadProgress) {
-  //           const percentDone = Math.round((event.loaded * 100) / event.total!);
-  //           // console.log('Progresso', percentDone);
-  //           this.progress = percentDone;
-  //         }
-  //       });
-  //   }
-  // }
 
   onCancel() {
     this.submitted = false;
@@ -190,23 +190,6 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
-  onChange(event) {
-    console.log(event);
-
-    const selectedFiles = <FileList>event.srcElement.files;
-    document.getElementById('customFileLabel')!.innerHTML = selectedFiles[0].name;
-
-    const fileNames: any = [];
-    this.files = new Set();
-    for (let i = 0; i < selectedFiles.length; i++) {
-      fileNames.push(selectedFiles[i].name);
-      this.files.add(selectedFiles[i]);
-    }
-    document.getElementById('customFileLabel')!.innerHTML = fileNames.join(', ');
-
-    this.progress = 0;
-  }
-
   onFileSelected(event: any) {
 
     if (event.target.files) {
@@ -218,19 +201,6 @@ export class ImoveisFormComponent implements OnInit {
       };
       this.ImovelImages.push(fileHandle);
     }
-  }
-
-  prepareFormData(foto: Foto): FormData {
-    const formData = new FormData();
-    formData.append('foto',
-      new Blob([JSON.stringify(foto)], { type: 'application/json' })
-    );
-
-    for (let i = 0; i < this.ImovelImages.length; i++) {
-      formData.append('foto', this.ImovelImages[i].file, this.ImovelImages[i].file.name)
-    }
-    return formData;
-
   }
 
   onDelete(foto) {
@@ -245,17 +215,17 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
-  onAddRow(): void {
-    this.form.value.foto.foto(this.form.value)
-  }
-
   removeImages(i: number) {
-    this.ImovelImages.splice(i, 1)
+    this.ImovelImages.splice(i, 1);
   }
 
   // changeTableRowColor(idx: any) {
   //   if (this.rowClicked === idx) this.rowClicked = -1;
   //   else this.rowClicked = idx;
   // }
+
+  fileDropped(evt) {
+    this.ImovelImages.push(evt);
+  }
 
 }
