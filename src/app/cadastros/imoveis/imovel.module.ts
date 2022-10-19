@@ -10,12 +10,14 @@ import { ImovelRoutingModule } from './imovel.routing.module';
 import { ImoveisListaComponent } from './imoveis-lista/imoveis-lista.component';
 import { ImoveisFormComponent } from './imoveis-form/imoveis-form.component';
 import { ImovelService } from './imovel.service';
+import { DragDirective } from './imoveis-form/drag-directive.directive';
 
 
 @NgModule({
   declarations: [
     ImoveisFormComponent,
-    ImoveisListaComponent
+    ImoveisListaComponent,
+    DragDirective
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { ImovelService } from './imovel.service';
     SharedModule,
     ImovelRoutingModule,
     MatGridListModule
+    
   ],
   providers: [ImovelService],
 })

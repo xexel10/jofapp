@@ -38,8 +38,8 @@
   </div>
 
   <!--Upload-->
-  <div style="margin-top: 10px" class="col-sm-6">
-    <div class="dropzone">
+  <div class="col-sm-6">
+    <div class="dropzone" appDrag (files) = "fileDropped($event)">
         <div class="text-wrapper">
           <div class="centered">
             Drag and drop your file or 

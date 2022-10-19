@@ -38,24 +38,6 @@ export class ImoveisFormComponent implements OnInit {
   progress = 0;
   ImovelImages: FileHandle[] = [];
 
-  getUrlExtension = (url) => {
-    return url
-      .split(/[#?]/)[0]
-      .split(".")
-      .pop()
-      .trim();
-  }
-
-  onImageEdit = async (imgUrl) => {
-    var imgExt = this.getUrlExtension(imgUrl);
-
-    const response = await fetch(imgUrl);
-    const blob = await response.blob();
-    const file = new File([blob], "profileImage." + imgExt, {
-      type: blob.type,
-    });
-  }
-
   constructor(
     private fb: FormBuilder,
     private service: ImovelService,
@@ -93,7 +75,7 @@ export class ImoveisFormComponent implements OnInit {
     if (this.form.value.id) {
       this.form.value.foto.foto.forEach(e => {
         const fileHandle: FileHandle = {
-          file: this.onImageEdit(e.file),
+          file: e.file,
           url: e.foto
         };
         this.ImovelImages.push(fileHandle);
@@ -224,7 +206,7 @@ export class ImoveisFormComponent implements OnInit {
   //   else this.rowClicked = idx;
   // }
 
-  fileDropped(evt) {
+  fileDropped(evt){
     this.ImovelImages.push(evt);
   }
 
