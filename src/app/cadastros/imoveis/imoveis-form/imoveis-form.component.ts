@@ -28,15 +28,16 @@ export class ImoveisFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
   basePath = '/admin/imovel';
+  progress = 0;
 
   inscricao!: Subscription;
   imovel!: Imovel;
   tipoImovel!: Observable<TipoImovel[]>;
   categoria!: Observable<Categoria[]>;
 
-  files!: Set<File>;
-  progress = 0;
-  //ImovelImages: FileHandle[] = [];
+  removedImage: any = [];
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -185,9 +186,11 @@ export class ImoveisFormComponent implements OnInit {
   }
 
   removeImages(i: number) {
-    this.form.value.fotos[i].status = 'd';
-
-    //this.form.value.fotos.splice(i, 1);
+    if (this.form.value.fotos[i].id !== undefined){
+      this.removedImage.push(this.form.value.fotos[i].id)
+    }
+    
+    this.form.value.fotos.splice(i, 1);
   }
 
   fileDropped(evt){
