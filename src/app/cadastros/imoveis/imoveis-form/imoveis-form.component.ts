@@ -36,8 +36,7 @@ export class ImoveisFormComponent implements OnInit {
   categoria!: Observable<Categoria[]>;
 
   removedImage: any = [];
-
-
+  images: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -63,24 +62,22 @@ export class ImoveisFormComponent implements OnInit {
       descricao: [this.imovel.descricao],
       tipoImovel: [this.imovel.tipoImovel],
       categoria: [this.imovel.categoria],
-      fotos: [this.imovel.fotos]
-     
+      foto: this.fb.group({
+        foto: [this.imovel.fotos]
+      })
+
     });
 
     // Carrega dropdownlist de tipoImovel e categoria
     this.tipoImovel = this.tipoImovelService.list();
     this.categoria = this.categoriaService.list();
 
-    // //Na Atualização pegas as images da API e coloca no array
-    // if (this.form.value.id) {
-    //   this.form.value.fotos.forEach(e => {
-    //     const fileHandle: FileHandle = {
-    //       file: e.file,
-    //       url: e.foto
-    //     };
-    //     this.this.form.value.fotos.push(fileHandle);
-    //   });
-    // }
+    //Na Atualização pegas as images da API e coloca no array
+    if (this.form.value.id) {
+      this.form.value.foto.foto.forEach(e => {
+        this.images.push(e);
+      });
+    }
   }
 
   onSubmit() {
@@ -114,16 +111,32 @@ export class ImoveisFormComponent implements OnInit {
 
   onUpload(v) {
 
-    this.form.value.fotos.forEach(images => {
-      this.service.saveImages(images.file!, v)
-        .subscribe((event: HttpEvent<Object>) => {
-          // console.log(event);
-          if (event.type === HttpEventType.Response) {
-            console.log('Upload Concluído');
-          } else if (event.type === HttpEventType.UploadProgress) {
-            const percentDone = Math.round((event.loaded * 100) / event.total!);
-            // console.log('Progresso', percentDone);
-            this.progress = percentDone;
+    this.images.forEach(images => {
+      if (images.id === undefined) {
+        this.service.saveImages(images, v)
+          .subscribe({
+            next: (v) => {
+              this.onUpload(v);
+            },
+            error: (e) => this.modal.showAlertDanger(e.error()),
+            complete: () => {
+              this.modal.showAlertSuccess('Inserido com sucesso!');
+              this.location.back();
+            }
+          });
+      }
+    });
+
+    this.removedImage.forEach(e => {
+      this.service.deleteImage(e)
+        .subscribe({
+          next: (v) => {
+            this.onUpload(v);
+          },
+          error: (e) => this.modal.showAlertDanger(e.error()),
+          complete: () => {
+            this.modal.showAlertSuccess('Inserido com sucesso!');
+            this.location.back();
           }
         });
     });
@@ -176,25 +189,22 @@ export class ImoveisFormComponent implements OnInit {
 
     if (event.target.files) {
 
-      const foto = event.target.files[0];
-      const fileHandle: FileHandle = {
-        foto: foto,
-        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(foto))
-      };
-      this.form.value.fotos.push(fileHandle);
+      const imageTela = event.target.files[0];
+      const novaImagem = { foto: imageTela, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageTela)) } as Foto;
+      this.images.push(novaImagem);
     }
   }
 
   removeImages(i: number) {
-    if (this.form.value.fotos[i].id !== undefined){
-      this.removedImage.push(this.form.value.fotos[i].id)
+    if (this.images[i].id !== undefined) {
+      this.removedImage.push(this.images[i])
     }
-    
-    this.form.value.fotos.splice(i, 1);
+
+    this.images.splice(i, 1);
   }
 
-  fileDropped(evt){
-    this.form.value.fotos.push(evt);
+  fileDropped(evt) {
+    this.images.push(evt);
   }
 
 }

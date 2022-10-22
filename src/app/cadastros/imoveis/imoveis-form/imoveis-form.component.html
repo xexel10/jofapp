@@ -1,82 +1,84 @@
 <form class="row g-3 needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
-  <div class="row align-items-start">
-    <div class="col-sm-4">
-      <label for="nome" class="form-label">Imóvel</label>
-      <input type="text" class="form-control" id="nome" placeholder="Imóvel" formControlName="nome" />
-      <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Imóvel é Obrigatório">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-sm-4">
+        <label for="nome" class="form-label">Imóvel</label>
+        <input type="text" class="form-control" id="nome" placeholder="Imóvel" formControlName="nome" />
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Imóvel é Obrigatório">
+        </app-campo-control-erro>
+      </div>
+
+      <div class="col-sm-4">
+        <label for="tipoImovel" class="form-label">Tipo Imóvel</label>
+        <select type="text" class="form-control" id="tipoImovel" placeholder="Tipo Imóvel" formControlName="tipoImovel">
+          <option *ngFor="let tp of tipoImovel | async" [value]="tp.id">
+            {{ tp.nome }}
+          </option>
+        </select>
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoImovel')" msgErro="Nome é Obrigatório">
+        </app-campo-control-erro>
+      </div>
+
+      <div class="col-sm-4">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select type="text" class="form-control" id="categoria" placeholder="Categoria" formControlName="categoria">
+          <option *ngFor="let cat of categoria | async" [value]="cat.id">
+            {{ cat.nome }}
+          </option>
+        </select>
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched('categoria')" msgErro="Categoria é Obrigatório">
+        </app-campo-control-erro>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"
+        style="height: 200px"></textarea>
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Descrição é Obrigatório">
       </app-campo-control-erro>
     </div>
+    <br>
+    <br>
+    <!--Upload-->
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="dropzone" appDrag (files)="fileDropped($event)">
+          <div class="text-wrapper">
+            <div class="centered">
+              Drag and drop your file or
+              <a (click)="selectFile.click()" class="browse-button">Browse</a>
+              browser a file
+            </div>
 
-    <div class="col-sm-4">
-      <label for="tipoImovel" class="form-label">Tipo Imóvel</label>
-      <select type="text" class="form-control" id="tipoImovel" placeholder="Tipo Imóvel" formControlName="tipoImovel">
-        <option *ngFor="let tp of tipoImovel | async" [value]="tp.id">
-          {{ tp.nome }}
-        </option>
-      </select>
-      <app-campo-control-erro [mostrarErro]="verificaValidTouched('tipoImovel')" msgErro="Nome é Obrigatório">
-      </app-campo-control-erro>
-    </div>
-
-    <div class="col-sm-4">
-      <label for="categoria" class="form-label">Categoria</label>
-      <select type="text" class="form-control" id="categoria" placeholder="Categoria" formControlName="categoria">
-        <option *ngFor="let cat of categoria | async" [value]="cat.id">
-          {{ cat.nome }}
-        </option>
-      </select>
-      <app-campo-control-erro [mostrarErro]="verificaValidTouched('categoria')" msgErro="Categoria é Obrigatório">
-      </app-campo-control-erro>
-    </div>
-  </div>
-  <div class="col-sm-12">
-    <label for="descricao" class="form-label">Descrição</label>
-    <textarea type="text" class="form-control" id="descricao" placeholder="Descrição" formControlName="descricao"
-      style="height: 200px"></textarea>
-    <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Descrição é Obrigatório">
-    </app-campo-control-erro>
-  </div>
-
-  <!--Upload-->
-  <div class="col-sm-6">
-    <div class="dropzone" appDrag (files) = "fileDropped($event)">
-        <div class="text-wrapper">
-          <div class="centered">
-            Drag and drop your file or 
-            <a (click)="selectFile.click()" class="browse-button">Browse</a>
-            browser a file
           </div>
-          
         </div>
-    </div>
-      <input type="file" style="display: none;" value="Selecionar" #selectFile class="custom-file-input" id="customFile"
-        (change)="onFileSelected($event)" multiple />
-
-    <br />
-    <div class="mt-5">
-      <div class="row">
-        <mat-grid-list cols="4" rowHeight="1:1">
-          <mat-grid-tile *ngFor="let item of this.form.value.fotos; let i = index;">
-            <div style="position: relative">
+        <input type="file" style="display: none;" value="Selecionar" #selectFile class="custom-file-input"
+          id="customFile" (change)="onFileSelected($event)" multiple />
+      </div>
+      <div class="col-sm-6">
+        <mat-grid-list cols="6" rowHeight="1:1">
+          <mat-grid-tile *ngFor="let item of images; let i = index;">
+            <div style="position: absolute">
               <span class="btn-remove-image" (click)="removeImages(i)">x</span>
-              <img class="itemImage" [src]="item.url" width="200px" height="200px" />
+              <img class="itemImage" [src]="item.url" width="50px" height="50px" />
             </div>
           </mat-grid-tile>
         </mat-grid-list>
+
       </div>
     </div>
-  </div>
-  <br />
-  <br />
-  <!---->
-  <div class="row align-items-start">
-    <div class="col-12" style="margin-top: 10px">
-      <button class="btn btn-primary" type="submit" (click)="onSubmit()">
-        Salvar
-      </button>
-      <button class="btn btn-default" type="submit" (click)="onCancel()">
-        Cancelar
-      </button>
+    <br />
+    <br />
+    <!---->
+    <div class="row align-items-start">
+      <div class="col-12" style="margin-top: 10px">
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()">
+          Salvar
+        </button>
+        <button class="btn btn-default" type="submit" (click)="onCancel()">
+          Cancelar
+        </button>
+      </div>
     </div>
   </div>
 </form>

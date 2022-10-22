@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { FileHandle } from './../../models/file-handle';
 import { Foto } from './../../models/foto';
 import { Imovel } from './../../models/imovel';
@@ -18,34 +19,17 @@ export class ImovelService extends CrudService<Imovel> {
     super(http, `${environment.API}imoveis/`, tokenService);
   }
 
-  upload(files: Set<File>, imovel) {
-
-    const formData = new FormData();
-    files.forEach(file => formData.append('foto', file, file.name));
-    formData.append('imovel', imovel.id);
-    formData.append('descricao', imovel.nome)
-
-    return this.http.post(`${environment.API}fotosImovel/`, formData, {
-      observe: 'events',
-      reportProgress: true
-    });
-
+  deleteImage(image){
+    const az = this.http.delete(`${environment.API}fotosImovel/`, image);
+    return az;
   }
 
-  saveImages(file: File, imovel) {
+  saveImages(file, imovel) {
 
     const formData = new FormData();
-    formData.append('foto', file, file.name);
+    formData.append('foto', file.foto);
     formData.append('imovel', imovel.id);
     formData.append('descricao', imovel.nome)
-
-    return this.http.post(`${environment.API}fotosImovel/`, formData, {
-      observe: 'events',
-      reportProgress: true
-    });
-    
+    return this.http.post(`${environment.API}fotosImovel/`, formData);
   }
-
-
-
 }
