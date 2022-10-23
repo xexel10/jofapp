@@ -59,9 +59,9 @@ export class ImoveisFormComponent implements OnInit {
     this.form = this.fb.group({
       id: [this.imovel.id],
       nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
-      descricao: [this.imovel.descricao],
-      tipoImovel: [this.imovel.tipoImovel],
-      categoria: [this.imovel.categoria],
+      descricao: [this.imovel.descricao, [Validators.required]],
+      tipoImovel: [this.imovel.tipoImovel, [Validators.required]],
+      categoria: [this.imovel.categoria, [Validators.required]],
       foto: this.fb.group({
         foto: [this.imovel.fotos]
       })
@@ -115,28 +115,22 @@ export class ImoveisFormComponent implements OnInit {
       if (images.id === undefined) {
         this.service.saveImages(images, v)
           .subscribe({
-            next: (v) => {
-              this.onUpload(v);
-            },
+            next: (v) => console.log(v),
             error: (e) => this.modal.showAlertDanger(e.error()),
             complete: () => {
               this.modal.showAlertSuccess('Inserido com sucesso!');
-              this.location.back();
             }
           });
       }
     });
 
     this.removedImage.forEach(e => {
-      this.service.deleteImage(e)
+      this.service.deleteImage(e.id)
         .subscribe({
-          next: (v) => {
-            this.onUpload(v);
-          },
-          error: (e) => this.modal.showAlertDanger(e.error()),
+          next: (v) => console.log(v),
+          error: (e) => this.modal.showAlertDanger(e.message),
           complete: () => {
             this.modal.showAlertSuccess('Inserido com sucesso!');
-            this.location.back();
           }
         });
     });

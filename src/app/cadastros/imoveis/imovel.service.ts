@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FileHandle } from './../../models/file-handle';
 import { Foto } from './../../models/foto';
@@ -19,9 +20,8 @@ export class ImovelService extends CrudService<Imovel> {
     super(http, `${environment.API}imoveis/`, tokenService);
   }
 
-  deleteImage(image){
-    const az = this.http.delete(`${environment.API}fotosImovel/`, image);
-    return az;
+  deleteImage(id){
+    return this.http.delete(`${environment.API}fotosImovel/${id}/`);
   }
 
   saveImages(file, imovel) {

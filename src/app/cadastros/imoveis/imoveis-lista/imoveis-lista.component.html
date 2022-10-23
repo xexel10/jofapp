@@ -1,5 +1,5 @@
-
-<div class="card mt-3">
+<div class="container">
+  <div class="card mt-3">
     <div class="card-header">
       <div class="float-left">
         <h4>Imóveis</h4>
@@ -23,7 +23,7 @@
           <tr *ngFor="let imovel of imoveis">
             <td>{{ imovel.id }}</td>
             <td>{{ imovel.nome }}</td>
-            <td>{{ imovel.categoria.nome }}</td>
+            <td>{{ imovel.categoria_nome }}</td>
             <td>{{ imovel.tipoImovel }}</td>
             <td>
               <span class="float-right">
@@ -46,11 +46,12 @@
 
     </div>
   </div>
+</div>
 
-  <ng-template #deleteModal>
-    <div class="modal-body text-center">
-      <p>Tem certeza que deseja remover esse imóvel?</p>
-      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
-    </div>
-  </ng-template>
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse imóvel?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+  </div>
+</ng-template>

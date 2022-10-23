@@ -7,6 +7,7 @@ export interface Imovel {
     nome: string;
     descricao: string;
     fotos: Foto[];
-    categoria: Categoria;
+    categoria: number;
+    categoria_nome: string;
     tipoImovel: number;
 }
