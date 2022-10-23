@@ -1,10 +1,19 @@
 .container {
     max-width: 1024px;
-  }
-mat-grid-tile{
+}
+
+.main {
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+mat-grid-tile {
     border: 1px solid #eee;
 }
-.btn-remove-image{
+
+.btn-remove-image {
     position: absolute;
     cursor: pointer;
     top: -10px;
@@ -17,7 +26,7 @@ mat-grid-tile{
     text-align: center;
 }
 
-.dropzone{
+.dropzone {
     height: 150px;
     min-width: 100px;
     display: table;
@@ -28,23 +37,19 @@ mat-grid-tile{
 
 
 }
-.text-wrapper{
+
+.text-wrapper {
     display: table-cell;
     vertical-align: middle;
 
 }
-.centered{
+
+.centered {
     text-align: center;
 }
-.browse-button{
+
+.browse-button {
     color: blue;
     cursor: pointer;
-    
-}
 
-.main{
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
