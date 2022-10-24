@@ -16,8 +16,8 @@ mat-grid-tile {
 .btn-remove-image {
     position: absolute;
     cursor: pointer;
-    top: -10px;
-    right: -10px;
+    top: 1px;
+    right: 1px;
     background-color: red;
     color: white;
     border-radius: 50%;
@@ -28,7 +28,7 @@ mat-grid-tile {
 
 .dropzone {
     height: 150px;
-    min-width: 100px;
+
     display: table;
     background-color: #eee;
     width: 300px;

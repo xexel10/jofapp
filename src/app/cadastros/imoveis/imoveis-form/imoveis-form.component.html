@@ -9,7 +9,7 @@
       <div class="main">
       <div class="row g-3">
         <div class="col-sm-4">
-        <!--Nome -->          
+        <!--Nome -->
           <label for="nome" class="form-label">Imóvel</label>
           <input type="text" class="form-control" id="nome" placeholder="Imóvel" formControlName="nome" />
           <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Imóvel é Obrigatório">
@@ -68,10 +68,10 @@
         <div class="col-sm-6">
           <mat-grid-list cols="6" rowHeight="1:1">
             <mat-grid-tile *ngFor="let item of images; let i = index;">
-              <div style="position: absolute">
+              <!--<div style="position: absolute">-->
                 <span class="btn-remove-image" (click)="removeImages(i)">x</span>
                 <img class="itemImage" [src]="item.url" width="50px" height="50px" />
-              </div>
+              <!--</div>-->
             </mat-grid-tile>
           </mat-grid-list>
 
