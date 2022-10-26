@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   TOKEN_URL: 'https://jof.herokuapp.com/token/',
   TOKEN_REFRESH_URL: 'https://jof.herokuapp.com/tokenRefresh/',
-  API: 'https://jof.herokuapp.com/api/',
+  API: 'http://ottoni.vps-kinghost.net/api/',
   BASE_URL: '/api'
 };
 

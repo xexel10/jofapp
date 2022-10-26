@@ -1,3 +1,14 @@
 .ng-invalid.ng-touched:not(form) {
     border: 1px solid rgb(245, 173, 173);
 }
+
+.container {
+    max-width: 1024px;
+}
+
+.main {
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

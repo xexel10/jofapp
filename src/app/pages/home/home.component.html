@@ -40,7 +40,7 @@
 
     <div class="row gx-5">
 
-        <div class="col-12 col-md-6" *ngFor="let fazenda of anuncios|async">
+        <div class="col-12 col-md-6" *ngFor="let fazenda of anuncios">
                 <div id="carouselExampleControls-{{fazenda.id}}" class="carousel slide small-image-container center-image" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -61,7 +61,7 @@
                       <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            <h3>{{fazenda.descricao}}</h3>
+            <h3>{{fazenda.nome}}</h3>
             <p class="secondary-color">Realizada em: 26/01/2018</p>
             <a href="#" class="btn">Detalhes</a>
         </div>

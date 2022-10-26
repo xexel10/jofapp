@@ -6,29 +6,23 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  anuncios!: Observable<Imovel[]>;
-  anuncios_!: Imovel[];
-  constructor(private imovelService: ImovelService) { }
+  anuncios!: Imovel[];
+  constructor(private imovelService: ImovelService) {}
 
   ngOnInit(): void {
     this.getAnuncios();
-    console.log("anuncios: ", this.anuncios)
   }
 
-  getAnuncios(){
-    this.imovelService.list().subscribe({
-      next: (dados) => this.anuncios_ = dados,
-      error: (erro) => console.log(erro)
-    })
-    this.anuncios = this.imovelService.list();
-   // this.homeService.getAnuncios().subscribe({
-   //   next: (anunciosRetornados) => this.anuncios = anunciosRetornados,
-   //   error: (e) => console.log(e)
-   // });
-
+  getAnuncios() {
+    this.imovelService.listar().subscribe({
+      next: (dados) => {
+        this.anuncios = <Imovel[]>dados['results'];
+        //console.log('Anuncios next ', this.anuncios);
+      },
+      error: (erro) => console.log(erro),
+    });
   }
-
 }

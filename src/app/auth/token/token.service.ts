@@ -15,7 +15,7 @@ export class TokenService {
   constructor(private http: HttpClient) { }
 
   hasToken() {
-    //      truque para retornar booleano  
+    //      truque para retornar booleano
     return !!this.getToken()
 
   }
@@ -31,7 +31,10 @@ export class TokenService {
   }
 
   getToken() {
-    this.verificaTokenExpirado();
+   // console.log("GET TOKEN: ");
+    //console.log(window.localStorage.getItem(KEY))
+    if (window.localStorage.getItem(KEY) != null)
+        this.verificaTokenExpirado();
 
     return window.localStorage.getItem(KEY)
 
@@ -43,6 +46,7 @@ export class TokenService {
   }
 
   verificaTokenExpirado() {
+      //console.log("verifica token expirado")
       this.horaToken = window.localStorage.getItem('HORA');
       this.horaAtual = new Date().getTime();
       if (this.horaAtual > Number(this.horaToken) + 60000) {

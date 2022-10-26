@@ -1,4 +1,5 @@
-
+import { FileHandle } from './../../../models/file-handle';
+import { Foto } from './../../../models/foto';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -6,19 +7,16 @@ import { Location } from '@angular/common';
 import { HttpEventType, HttpEvent } from '@angular/common/http';
 
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { ImovelService } from './../imovel.service';
 import { Subscription, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-
-
-import { environment } from 'src/environments/environment';
 
 import { TipoImovel } from './../../../models/tipo-imovel';
-import { Imovel } from './../../../models/imovel';
 import { TipoImovelService } from './../../tipo-imovel/tipo-imovel.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from './../../categorias/categoria.service';
-import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
+import { ImovelService } from './../imovel.service';
+import { Imovel } from './../../../models/imovel';
+import { DomSanitizer } from '@angular/platform-browser';
+import { faTowerObservation } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-imoveis-form',
@@ -30,16 +28,15 @@ export class ImoveisFormComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
   basePath = '/admin/imovel';
+  progress = 0;
 
-  imovel!: Imovel;
-  // tipoImovel!: TipoImovel[];
   inscricao!: Subscription;
+  imovel!: Imovel;
   tipoImovel!: Observable<TipoImovel[]>;
   categoria!: Observable<Categoria[]>;
 
-  files!: Set<File>;
-  progress = 0;
-
+  removedImage: any = [];
+  images: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +45,8 @@ export class ImoveisFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private modal: AlertModalService,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -58,18 +56,28 @@ export class ImoveisFormComponent implements OnInit {
       }
     );
 
-    this.tipoImovel = this.tipoImovelService.list();
-    this.categoria = this.categoriaService.list();
-
     this.form = this.fb.group({
       id: [this.imovel.id],
       nome: [this.imovel.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
-      descricao: [this.imovel.nome],
-      tipoImovel: [this.imovel.nome],
-      categoria: [this.imovel.nome]
+      descricao: [this.imovel.descricao, [Validators.required]],
+      tipoImovel: [this.imovel.tipoImovel, [Validators.required]],
+      categoria: [this.imovel.categoria, [Validators.required]],
+      foto: this.fb.group({
+        foto: [this.imovel.fotos]
+      })
 
     });
 
+    // Carrega dropdownlist de tipoImovel e categoria
+    this.tipoImovel = this.tipoImovelService.list();
+    this.categoria = this.categoriaService.list();
+
+    //Na Atualização pegas as images da API e coloca no array
+    if (this.form.value.id) {
+      this.form.value.foto.foto.forEach(e => {
+        this.images.push(e);
+      });
+    }
   }
 
   onSubmit() {
@@ -86,7 +94,9 @@ export class ImoveisFormComponent implements OnInit {
       }
 
       this.service.save(this.form.value).subscribe({
-        next: (v) => console.log(v),
+        next: (v) => {
+          this.onUpload(v);
+        },
         error: (e) => this.modal.showAlertDanger(msgError),
         complete: () => {
           this.modal.showAlertSuccess(msgSuccess);
@@ -97,6 +107,34 @@ export class ImoveisFormComponent implements OnInit {
     } else {
       this.verificaValidacoesForm(this.form);
     }
+  }
+
+  onUpload(v) {
+
+    this.images.forEach(images => {
+      if (images.id === undefined) {
+        this.service.saveImages(images, v)
+          .subscribe({
+            next: (v) => console.log(v),
+            error: (e) => this.modal.showAlertDanger(e.error()),
+            complete: () => {
+              this.modal.showAlertSuccess('Inserido com sucesso!');
+            }
+          });
+      }
+    });
+
+    this.removedImage.forEach(e => {
+      this.service.deleteImage(e.id)
+        .subscribe({
+          next: (v) => console.log(v),
+          error: (e) => this.modal.showAlertDanger(e.message),
+          complete: () => {
+            this.modal.showAlertSuccess('Inserido com sucesso!');
+          }
+        });
+    });
+
   }
 
   onCancel() {
@@ -141,39 +179,26 @@ export class ImoveisFormComponent implements OnInit {
     });
   }
 
-  onUpload() {
-    if (this.files && this.files.size > 0) {
-      this.service.upload(this.files, environment.BASE_URL + '/upload')
-        .subscribe((event: HttpEvent<Object>) => {
-          // console.log(event);
-          if (event.type === HttpEventType.Response) {
-            console.log('Upload Concluído');
-          } else if (event.type === HttpEventType.UploadProgress) {
-            const percentDone = Math.round((event.loaded * 100) / event.total!);
-            // console.log('Progresso', percentDone);
-            this.progress = percentDone;
-          }
-        });
+  onFileSelected(event: any) {
+
+    if (event.target.files) {
+
+      const imageTela = event.target.files[0];
+      const novaImagem = { foto: imageTela, url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageTela)) } as Foto;
+      this.images.push(novaImagem);
     }
   }
 
-
-  onChange(event) {
-    console.log(event);
-
-    const selectedFiles = <FileList>event.srcElement.files;
-    document.getElementById('customFileLabel')!.innerHTML = selectedFiles[0].name;
-
-    const fileNames: any = [];
-    this.files = new Set();
-    for (let i = 0; i < selectedFiles.length; i++) {
-      fileNames.push(selectedFiles[i].name);
-      this.files.add(selectedFiles[i]);
+  removeImages(i: number) {
+    if (this.images[i].id !== undefined) {
+      this.removedImage.push(this.images[i])
     }
-    document.getElementById('customFileLabel')!.innerHTML = fileNames.join(', ');
 
-    this.progress = 0;
+    this.images.splice(i, 1);
   }
 
+  fileDropped(evt) {
+    this.images.push(evt);
+  }
 
 }
