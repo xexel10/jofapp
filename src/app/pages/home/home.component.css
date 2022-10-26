@@ -16,3 +16,6 @@
 .titulo h1 {
     font-size: 2rem;
 }
+.page-link{
+  cursor: pointer;
+}

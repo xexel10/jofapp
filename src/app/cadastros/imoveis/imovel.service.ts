@@ -35,8 +35,13 @@ export class ImovelService extends CrudService<Imovel> {
     return this.http.post(`${environment.API}fotosImovel/`, formData);
   }
 
-  listar(): Observable<Resposta[]> {
-    let retorno =  this.http.get<Resposta[]>(`${environment.API}imoveis/`);
+  listar(page: string): Observable<Resposta[]> {
+    var retorno = new Observable<Resposta[]>;
+    //if (url == ''){
+      retorno =  this.http.get<Resposta[]>(`${environment.API}imoveis/?page=`+page);
+    //}
+    //else
+    //  retorno =  this.http.get<Resposta[]>(url);
     //retorno.subscribe({
     //  next: dados => console.log("Retorno: ", dados['results'])
     //});

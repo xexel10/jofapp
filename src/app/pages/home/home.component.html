@@ -67,6 +67,17 @@
         </div>
 
 
+        <nav aria-label="...">
+          <ul class="pagination">
+            <!--<li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>-->
+            <div *ngFor="let _ of [].constructor(pages); let x = index">
+              <li  [class.active]="activePage == x+1"  class="page-item"><a (click)="mudarPagina(x+1)" id='{{ x+1 }}' class="page-link" >{{ x+1 }}</a></li>
+
+            </div>
+          </ul>
+        </nav>
 
 
 

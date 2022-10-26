@@ -41,7 +41,10 @@ export class TokenService {
   }
 
   removeToken() {
+    window.localStorage.removeItem('HORA');
+    window.localStorage.removeItem('REFRESH');
     window.localStorage.removeItem(KEY);
+
 
   }
 
