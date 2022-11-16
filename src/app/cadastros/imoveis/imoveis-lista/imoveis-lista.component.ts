@@ -20,7 +20,7 @@ export class ImoveisListaComponent implements OnInit {
 
   //O $ é uma prática da comunidade//
   //Criei um observable de imoveis que será um array de imovel
-  imoveis$!: Observable<Imovel[]>;
+  imoveis$!: Imovel[];
   imovelSelecionada!: Imovel;
   error$ = new Subject<Imovel>();
   bsModalRef?: BsModalRef;
@@ -42,19 +42,29 @@ export class ImoveisListaComponent implements OnInit {
     if (!this.tokenService.hasToken()){
       this.router.navigate(['/login']);
     }
-    this.onRefresh();
+    this.onRefresh('1');
 
 
   }
 
-  onRefresh() {
-    this.imoveis$ = this.service.list().pipe(
-      catchError(error => {
-        console.error(error);
-        this.handleError();
-        return EMPTY;
-      })
-    );
+  onRefresh(page: string) {
+    //this.imoveis$ = this.service.list().pipe(
+    //  catchError(error => {
+     //   console.error(error);
+     //   this.handleError();
+     //   return EMPTY;
+     // })
+    //);
+    this.service.listar(page).subscribe({
+      next: (dados) => {
+        this.imoveis$ = <Imovel[]>dados['results'];
+        //this.calculaPaginas(dados['count'], dados['next'],dados['previous']);
+        //console.log('Qnt paginas: ', this.pages)
+        //console.log('Anuncios next ', this.anuncios);
+      },
+      error: (erro) => console.log(erro),
+    });
+
   }
 
   onEdit(id) {
@@ -88,7 +98,7 @@ export class ImoveisListaComponent implements OnInit {
         next: (v) => console.log(v),
         error: (e) =>  this.alertService.showAlertDanger('Erro ao remover imóvel. Tente novamente mais tarde.'),
         complete: () => {
-          this.onRefresh();
+          this.onRefresh('1');
         }
       });
 

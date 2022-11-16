@@ -38,7 +38,7 @@ export class ImovelService extends CrudService<Imovel> {
   listar(page: string): Observable<Resposta[]> {
     var retorno = new Observable<Resposta[]>;
     //if (url == ''){
-      retorno =  this.http.get<Resposta[]>(`${environment.API}imoveis/?page=`+page);
+      retorno =  this.http.get<Resposta[]>(`${environment.API}imoveis/?page=${page}`);
     //}
     //else
     //  retorno =  this.http.get<Resposta[]>(url);
