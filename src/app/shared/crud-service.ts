@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { delay, tap, take } from 'rxjs/operators';
 import { TokenService } from '../auth/token/token.service';
+import { Resposta } from '../models/resposta';
 
 export class CrudService<T> {
   //tokenService! : TokenService;
@@ -31,15 +33,21 @@ export class CrudService<T> {
   loadByID(id) {
     let headers = new HttpHeaders()
         .append('Authorization', 'Bearer '+this.tokenService.getToken());
-    return this.http.get<T>(`${this.API_URL}${id}/`).pipe(take(1));
+      console.log("passou no loadbyid");
+    return this.http.get<T>(`${this.API_URL}${id}/`, { headers }).pipe(take(1));
   }
 
   private create(record: T) {
-    return this.http.post(this.API_URL, record).pipe(take(1));
+    let headers = new HttpHeaders();
+    headers = new HttpHeaders().append('Authorization', 'Bearer '+this.tokenService.getToken())
+
+    return this.http.post(this.API_URL, record, { headers }).pipe(take(1));
   }
 
   private update(record: T) {
-    return this.http.put(`${this.API_URL}${record['id']}/`, record).pipe(take(1));
+    let headers = new HttpHeaders();
+    headers = new HttpHeaders().append('Authorization', 'Bearer '+this.tokenService.getToken())
+    return this.http.put(`${this.API_URL}${record['id']}/`, record, {headers}).pipe(take(1));
   }
 
   save(record: T) {
@@ -51,5 +59,18 @@ export class CrudService<T> {
 
   remove(id) {
     return this.http.delete(`${this.API_URL}${id}/`).pipe(take(1));
+  }
+
+  lista(page: string){
+    var retorno = new Observable<Resposta[]>;
+    //if (url == ''){
+      let headers = new HttpHeaders();
+      headers = headers = new HttpHeaders().append('Authorization', 'Bearer '+this.tokenService.getToken())
+      return this.http.get<T[]>(`${this.API_URL}?page=${page}`, { headers })
+      .pipe(
+        delay(2000),
+        tap(console.log)
+      );
+
   }
 }

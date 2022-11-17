@@ -21,7 +21,8 @@ export class TipoImoveisListaComponent implements OnInit {
 
   //O $ é uma prática da comunidade//
   //Criei um observable de categorias que será um array de categoria
-  tipos_imovel$!: Observable<TipoImovel[]>;
+  //tipos_imovel$!: Observable<TipoImovel[]>;
+  tipos_imovel$!: TipoImovel[];
   tiposImovelSelecionado!: TipoImovel;
   error$ = new Subject<boolean>();
   bsModalRef?: BsModalRef;
@@ -43,19 +44,29 @@ export class TipoImoveisListaComponent implements OnInit {
     if (!this.tokenService.hasToken()){
       this.router.navigate(['/login']);
     }
-    this.onRefresh();
+    this.onRefresh('1');
 
 
   }
 
-  onRefresh() {
-    this.tipos_imovel$ = this.service.list().pipe(
-      catchError(error => {
-        console.error(error);
-        this.handleError();
-        return EMPTY;
-      })
-    );
+  onRefresh(page: string) {
+    this.service.lista('1').subscribe({
+      next: (dados) => {
+            console.log("Dados: ",dados)
+            this.tipos_imovel$ = <TipoImovel[]>dados['results'];
+          },
+      error: (erro) => console.log(erro)
+    })
+
+
+
+    //this.tipos_imovel$ = this.service.list().pipe(
+     // catchError(error => {
+     //   console.error(error);
+      //  this.handleError();
+       // return EMPTY;
+      //})
+    //);
   }
 
   onEdit(id) {
@@ -89,7 +100,7 @@ export class TipoImoveisListaComponent implements OnInit {
         next: (v) => console.log(v),
         error: (e) =>  this.alertService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.'),
         complete: () => {
-          this.onRefresh();
+          this.onRefresh('1');
         }
       });
 

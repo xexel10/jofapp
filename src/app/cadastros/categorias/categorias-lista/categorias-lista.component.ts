@@ -20,7 +20,8 @@ export class CategoriasListaComponent implements OnInit {
 
   //O $ é uma prática da comunidade//
   //Criei um observable de categorias que será um array de categoria
-  categorias$!: Observable<Categoria[]>;
+  //categorias$!: Observable<Categoria[]>;
+  categorias$!: Categoria[];
   categoriaSelecionada!: Categoria;
   error$ = new Subject<boolean>();
   bsModalRef?: BsModalRef;
@@ -42,19 +43,19 @@ export class CategoriasListaComponent implements OnInit {
     if (!this.tokenService.hasToken()){
       this.router.navigate(['/login']);
     }
-    this.onRefresh();
+    this.onRefresh('1');
 
 
   }
 
-  onRefresh() {
-    this.categorias$ = this.service.list().pipe(
-      catchError(error => {
-        console.error(error);
-        this.handleError();
-        return EMPTY;
-      })
-    );
+  onRefresh(page: string) {
+    this.service.lista('1').subscribe({
+      next: (dados) => {
+            console.log("Dados: ",dados)
+            this.categorias$ = <Categoria[]>dados['results'];
+          },
+      error: (erro) => console.log(erro)
+    })
   }
 
   onEdit(id) {
@@ -88,7 +89,7 @@ export class CategoriasListaComponent implements OnInit {
         next: (v) => console.log(v),
         error: (e) =>  this.alertService.showAlertDanger('Erro ao remover curso. Tente novamente mais tarde.'),
         complete: () => {
-          this.onRefresh();
+          this.onRefresh('1');
         }
       });
 

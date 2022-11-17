@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover" *ngIf="tipos_imovel$ | async as tipo_imoveis; else loading">
+    <table class="table table-hover" *ngIf="tipos_imovel$  as tipo_imoveis; else loading">
       <thead>
         <tr>
           <th>#</th>
