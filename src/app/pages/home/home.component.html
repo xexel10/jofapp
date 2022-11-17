@@ -46,6 +46,11 @@
                         <div class="carousel-item active">
                             <img class="d-block w-100 img" src="{{fazenda.fotos[0].foto}}" alt="First slide">
                         </div>
+
+                       <!-- <div class="carousel-item">
+                          <iframe class="d-block w-100 img embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                        </div>-->
+
                         <ng-container *ngFor="let fotos of fazenda.fotos; let i = index"> -->
                           <div class="carousel-item" *ngIf="i>0" >
                               <img class="d-block w-100 img" src="{{fotos.foto}}" alt="Second{{fazenda.id}}-{{fotos.id}}">
@@ -63,7 +68,7 @@
                 </div>
             <h2>{{fazenda.nome}}</h2>
             <p class="secondary-color">{{fazenda.descricao}}</p>
-            <a href="#" class="btn">Detalhes</a>
+            <a href="https://api.whatsapp.com/send?phone=5567999446383&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20fazenda%20{{fazenda.nome}}%20 - Descricao - {{fazenda.descricao}}" class="btn">Mais informações</a>
         </div>
 
 
