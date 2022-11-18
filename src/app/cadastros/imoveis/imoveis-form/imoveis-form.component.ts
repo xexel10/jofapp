@@ -72,10 +72,10 @@ export class ImoveisFormComponent implements OnInit {
 
     // Carrega dropdownlist de tipoImovel e categoria
     console.log("--------------_GET IMOVEIS--------------")
-    this.getTipoImoveis('1');
+    //this.getTipoImoveis('1');
 
-    this.tipoImovel = this.tipoImovelService.list();
-    this.categoria = this.categoriaService.list();
+    this.tipoImovel = this.tipoImovelService.listAll();
+    this.categoria = this.categoriaService.listAll();
 
     //Na Atualização pegas as images da API e coloca no array
     if (this.form.value.id) {
@@ -208,13 +208,10 @@ export class ImoveisFormComponent implements OnInit {
 
   getTipoImoveis(page: string){
     console.log("Dentro do método GET TIPO IMOVEIS");
-    let hasNext = false;
-    let nextUrl = "";
+
     this.tipoImovelService.lista(page).subscribe({
       next: (dados) => {this.tipoImovel$ = <TipoImovel[]>dados['results'];
       console.log("Dentro do next ",dados)
-      hasNext = dados['next'] != "" ? true : false;
-      nextUrl = dados['next'];
       console.log("Tipos imoveis: ",this.tipoImovel$);
       },
       error: (erro) => console.log(erro)
