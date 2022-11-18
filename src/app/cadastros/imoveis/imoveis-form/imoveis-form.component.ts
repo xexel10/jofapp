@@ -33,6 +33,8 @@ export class ImoveisFormComponent implements OnInit {
   inscricao!: Subscription;
   imovel!: Imovel;
   tipoImovel!: Observable<TipoImovel[]>;
+  tipoImovel$!: TipoImovel[];
+
   categoria!: Observable<Categoria[]>;
 
   removedImage: any = [];
@@ -69,6 +71,9 @@ export class ImoveisFormComponent implements OnInit {
     });
 
     // Carrega dropdownlist de tipoImovel e categoria
+    console.log("--------------_GET IMOVEIS--------------")
+    this.getTipoImoveis('1');
+
     this.tipoImovel = this.tipoImovelService.list();
     this.categoria = this.categoriaService.list();
 
@@ -199,6 +204,23 @@ export class ImoveisFormComponent implements OnInit {
 
   fileDropped(evt) {
     this.images.push(evt);
+  }
+
+  getTipoImoveis(page: string){
+    console.log("Dentro do método GET TIPO IMOVEIS");
+    let hasNext = false;
+    let nextUrl = "";
+    this.tipoImovelService.lista(page).subscribe({
+      next: (dados) => {this.tipoImovel$ = <TipoImovel[]>dados['results'];
+      console.log("Dentro do next ",dados)
+      hasNext = dados['next'] != "" ? true : false;
+      nextUrl = dados['next'];
+      console.log("Tipos imoveis: ",this.tipoImovel$);
+      },
+      error: (erro) => console.log(erro)
+
+    })
+
   }
 
 }
