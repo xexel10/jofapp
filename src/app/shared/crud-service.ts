@@ -29,6 +29,21 @@ export class CrudService<T> {
         tap(console.log)
       );
   }
+  listAll() {
+    //this.tokenService = new TokenService();
+    let headers = new HttpHeaders();
+    headers = headers = new HttpHeaders().append('Authorization', 'Bearer '+this.tokenService.getToken())
+    // ---------- remove a barra ------------
+    this.API_URL = this.API_URL.substring(0, this.API_URL.length -1);
+    // ------------ adiciona o getAll -------
+    this.API_URL+= 'GetAll/';
+    console.log('API URL:  ',this.API_URL);
+    return this.http.get<T[]>(this.API_URL, { headers })
+      .pipe(
+        delay(2000),
+        tap(console.log)
+      );
+  }
 
   loadByID(id) {
     let headers = new HttpHeaders()
