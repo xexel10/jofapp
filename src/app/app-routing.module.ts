@@ -1,3 +1,4 @@
+import { SobreComponent } from './pages/sobre/sobre.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     path: 'admin/imovel',
     loadChildren: () => import('./cadastros/imoveis/imovel.module').then(m => m.ImovelModule)
   },
+  { path: 'sobre', component: SobreComponent},
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: HomeAdminSidebarComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },

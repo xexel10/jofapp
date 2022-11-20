@@ -21,6 +21,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ImovelModule } from './cadastros/imoveis/imovel.module';
 import { FontAwesomeModule  } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SobreComponent } from './pages/sobre/sobre.component';
 
 
 
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppNavbarComponent,
     HomeComponent,
     HomeAdminSidebarComponent,
-    AdminComponent
+    AdminComponent,
+    SobreComponent
   ],
   imports: [
     BrowserModule,

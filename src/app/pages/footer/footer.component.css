@@ -5,3 +5,11 @@
 .link {
   color: inherit;
 }
+
+a {
+  text-decoration: none;
+}
+
+.desenvolvido {
+  font-family: 'Isidora Soft Alt 800', sans-serif;
+}
